@@ -132,11 +132,11 @@
 
               @if(strtotime($announce->deadline) < time())
 
-                <a href="{{route('addProposal',$announce->id)}}" class="btn btn-primary mr-2 float-right">My Proposals</a>
+                <a href="{{route('addProposal',$announce->id)}}" class="btn btn-primary mr-2 float-right">My Article</a>
               @else
 
                 <a href="{{route('addProposal',$announce->id)}}" class="btn btn-primary mr-2 float-right">My Proposals</a>
-                  <a href="{{route('addProposal',$announce->id)}}" class="mr-3 btn btn-success float-right">Admit Your Proposal Here</a>
+                  <a href="{{route('addProposal',$announce->id)}}" class="mr-3 btn btn-success float-right">Admit Your Articles Here</a>
               @endif
 
             @endrole
@@ -145,7 +145,7 @@
 
              @hasanyrole('superadmin|manager')
              
-              <a href="{{route('addProposal',$announce->id)}}" class="btn btn-success float-right">See Proposals</a>
+              <a href="{{route('addProposal',$announce->id)}}" class="btn btn-success float-right">See Article</a>
 
               @endhasanyrole
 
