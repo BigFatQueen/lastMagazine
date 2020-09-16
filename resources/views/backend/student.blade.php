@@ -465,7 +465,7 @@
                 $('#add-form').hide();
                 $('#showTable').show();
                $('.success').removeClass('d-none');
-               $('.success').text(res.message);
+               $('.success').text(data.message);
                 $('.success').hide(5000);
 
              
