@@ -9,4 +9,7 @@ class Faculty extends Model
 {
 	use SoftDeletes;
    protected $fillable=['name','logo'];
+   public function records(){
+   	return $this->hasMany('App\Record');
+   }
 }
