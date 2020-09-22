@@ -26,6 +26,7 @@
                         <label for="exampleFormControlSelect1">Choose for Faculty</label>
                         <span class="text-danger d-block faculty_id d-none"></span>
                         <select class="form-control" name="faculty_id" id="exampleFormControlSelect1">
+                          <option>Choose Faculty</option>
                           @foreach($faculties as $faculty)
                           <option value="{{$faculty->id}}">{{$faculty->name}}</option>
                           @endforeach
@@ -369,7 +370,9 @@
             success:function(data){
                // console.log(data);
                 $('#add-form').hide();
-                $('#showTable').show();
+                // $('#showTable').show();
+                $('#cmtable').DataTable().ajax.reload();
+                $('#cshowTable').show();
                $('.success').removeClass('d-none');
                $('.success').text(data.message);
                
@@ -389,8 +392,7 @@
          // $('#add-form').hide();
          console.log('heo');
                
-          $('#cmtable').DataTable().ajax.reload();
-          $('#cshowTable').show();
+          
       })
 
 
