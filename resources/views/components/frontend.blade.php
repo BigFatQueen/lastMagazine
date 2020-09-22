@@ -34,35 +34,38 @@
 <body class="d-flex flex-column">
 <div id="page-content">
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark  fixed-top" style="background-color: #0f61aa;">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-white fixed-top" >
     <div class="container">
-      <a class="navbar-brand" href="#">KMD</a>
+      
+        <img src="{{asset('KMDtemplate/image/logo4.jpg')}}" style="width: 10%">
+      
+      
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home
+            <a class="nav-link text-dark" href="#" >Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link text-dark" href="#">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
+            <a class="nav-link text-dark" href="#">Services</a>
           </li>
           @if(!Auth::check())
           <li class="nav-item">
-            <a class="nav-link" href="#">Sign in</a>
+            <a class="nav-link text-dark" href="{{route('login')}}">Sign in</a>
           </li>
            <li class="nav-item">
-            <a class="nav-link" href="#">Sing Up</a>
+            <a class="nav-link text-dark" href="{{route('register')}}">Sing Up</a>
           </li>
           @else
           <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown " class="nav-link text-dark dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
@@ -94,7 +97,7 @@
   <!-- /.container -->
 </div>
   <!-- Footer -->
-  <footer class="py-5 " style="background-color: #0f61aa;">
+  <footer class="py-5 " style="background-color: #f066b9;">
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
     </div>

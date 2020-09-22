@@ -41,10 +41,11 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if($user->hasRole('superadmin')){
-            return redirect('/student');
-        }else{
+        if($user->hasRole('guest')){
             return redirect('/announce');
+        }else{
+            return redirect('/staticalDashboard');
         }
+        // return redirect('/announceList');
     }
 }

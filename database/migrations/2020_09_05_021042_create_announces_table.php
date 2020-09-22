@@ -18,6 +18,7 @@ class CreateAnnouncesTable extends Migration
             $table->string('title');
             $table->text('decsription')->nullable();
             $table->string('deadline')->nullable();
+            $table->string('editLDate')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -9,6 +9,7 @@ use App\Coordinator;
 use App\Announce;
 use App\Student;
 use App\Academic;
+use App\Faculty;
 use App\Record;
 use Auth;
 use App\Comment;
@@ -16,8 +17,8 @@ use App\Http\Resources\CommentResource;
 use Illuminate\Support\Str;
 use Mail;
 use URL;
-
 use DB;
+use ZipArchive;
 class MagazineController extends Controller
 {
     /**
@@ -27,8 +28,34 @@ class MagazineController extends Controller
      */
     public function index()
     {
-        //
+       // $role= Auth::user()->roles[0]->name;
+       // if($role=='student'){
+
+       // }
+       //  $magazines=Magazine::orderBy('id','desc')->get();
+       //  return view('frontend.article.list',compact('magazines'));
     }
+
+    public function getArticleByAID($id){
+        // dd($id);
+
+         $role= Auth::user()->roles[0]->name;
+       if($role=='student'){
+           $sid= Auth::user()->student[0]->id;
+           $magazines=Record::with(['magazines'=>function($q) use ($id){
+            $q->where('announce_id',$id);
+           }])->where('student_id',$sid)->get();
+           // dd($magazines);
+       }
+       $announce=Announce::find($id);
+        //$magazines=Magazine::orderBy('id','desc')->get();
+        return view('frontend.article.list',compact('magazines','announce'));
+    }
+
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -48,7 +75,21 @@ class MagazineController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+         // dd($request);
+
+        $request->validate([
+            'title' => ['required', 'max:255'],
+            'coverphoto' => ['required','mimes:jpeg,jpg,png'],
+            'article' => ['required','mimes:pdf'],
+            'accept' => ['required'],
+        ]);
+        
+       //  if ($validator->fails())
+       //  {
+       //      return response()->json(['errors'=>$validator->errors()->all()]);
+       //  }
+
+
         $postDate=Carbon::now()->toDateTimeString();
         $title=$request->title;
         // $coverphoto=$request->file('coverphoto');
@@ -78,31 +119,31 @@ class MagazineController extends Controller
 
 
         //for descripton  and description photo
-        $des=$request->description;
-        $dom=new \DomDocument();
-        $dom->loadHTML($des,LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $images = $dom->getElementsByTagName('img');
+        // $des=$request->description;
+        // $dom=new \DomDocument();
+        // $dom->loadHTML($des,LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        // $images = $dom->getElementsByTagName('img');
        // dd($images); 
-        foreach($images as $k => $img){
+        // foreach($images as $k => $img){
 
-            $data = $img->getAttribute('src');
-            list($type, $data) = explode(';', $data);
+        //     $data = $img->getAttribute('src');
+        //     list($type, $data) = explode(';', $data);
 
-            list(, $data)      = explode(',', $data);
+        //     list(, $data)      = explode(',', $data);
 
-            $data = base64_decode($data);
+        //     $data = base64_decode($data);
 
-             $image_name='/storages/description/'.time().'.png';
+        //      $image_name='/storages/description/'.time().'.png';
 
-            $path = public_path() . $image_name;
-            file_put_contents($path, $data);
+        //     $path = public_path() . $image_name;
+        //     file_put_contents($path, $data);
 
-            $img->removeAttribute('src');
+        //     $img->removeAttribute('src');
 
-            $img->setAttribute('src', $image_name);
-        }
+        //     $img->setAttribute('src', $image_name);
+        // }
         // dd($postDate);
-       $description = $dom->saveHTML();
+      // $description = $dom->saveHTML();
         // protected $fillable=['title','photo','postDate','description','article','record_id'];
 
        $user_id=Auth::user()->id;
@@ -118,7 +159,7 @@ class MagazineController extends Controller
         'title'=>$title,
         'photo'=>$filepath,
         'postDate'=>$postDate,
-        'description'=>$description,
+        'description'=>$request->description,
         'article'=>$articlepath,
         'record_id'=>$record_id,
         'announce_id'=>$request->announce_id
@@ -139,7 +180,7 @@ class MagazineController extends Controller
 
           // dd("sent");
 
-     return redirect()->route('addProposal',$request->announce_id);
+     return redirect()->route('getArticleByAID',$request->announce_id);
     }
 
     /**
@@ -151,7 +192,7 @@ class MagazineController extends Controller
     public function show($id)
     {
         $magazine=Magazine::find($id);
-        return view('frontend.blogPost',compact('magazine'));
+         return view('frontend.article.articleDetail',compact('magazine'));
     }
 
     /**
@@ -205,33 +246,33 @@ class MagazineController extends Controller
 
 
         //for descripton  and description photo
-        $des=$request->description;
-        $dom=new \DomDocument();
-        $dom->loadHTML($des,LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $images = $dom->getElementsByTagName('img');
+        // $des=$request->description;
+        // $dom=new \DomDocument();
+        // $dom->loadHTML($des,LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        // $images = $dom->getElementsByTagName('img');
        // dd($images); 
-        foreach($images as $k => $img){
+        // foreach($images as $k => $img){
 
-            $data = $img->getAttribute('src');
-            if(Str::startsWith($data, 'data')){
-            list($type, $data) = explode(';', $data);
+        //     $data = $img->getAttribute('src');
+        //     if(Str::startsWith($data, 'data')){
+        //     list($type, $data) = explode(';', $data);
 
-            list(, $data)      = explode(',', $data);
+        //     list(, $data)      = explode(',', $data);
 
-            $data = base64_decode($data);
+        //     $data = base64_decode($data);
 
-             $image_name='/storages/description/'.time().'.png';
+        //      $image_name='/storages/description/'.time().'.png';
 
-            $path = public_path() . $image_name;
-            file_put_contents($path, $data);
+        //     $path = public_path() . $image_name;
+        //     file_put_contents($path, $data);
 
-            $img->removeAttribute('src');
+        //     $img->removeAttribute('src');
 
-            $img->setAttribute('src', $image_name);
-            }
-        }
+        //     $img->setAttribute('src', $image_name);
+        //     }
+        // }
         // dd($postDate);
-       $description = $dom->saveHTML();
+       // $description = $dom->saveHTML();
         // protected $fillable=['title','photo','postDate','description','article','record_id'];
 
        
@@ -240,14 +281,14 @@ class MagazineController extends Controller
         $article->title=$title;
         $article->photo=$filepath;
         
-        $article->description=$description;
+        $article->description=$request->description;
         $article->article=$articlepath;
         
         
 
         $article->save();
 
-     return redirect()->route('addProposal',$article->announce_id);
+     return redirect()->route('getArticleByAID',$article->announce_id);
 
     }
 
@@ -259,7 +300,9 @@ class MagazineController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // dd($id);
+       // Magazine::find($id)->delete();
+
     }
 
     public function comment(Request $request){
@@ -354,6 +397,15 @@ class MagazineController extends Controller
     }
 
 
+    public function unselectdProposal($id){
+        $magazine=Magazine::find($id);
+          $magazine->selected_status=0;
+          $magazine->save();
+         session(['success' => 'unselected proposal!']);
+          return  redirect()->route('magazine.show',$id);
+    }
+
+
     public function pdfview($id){
         $magazine=Magazine::find($id);
         $filepath=public_path().$magazine->article;
@@ -368,7 +420,215 @@ class MagazineController extends Controller
     }
 
 
-    // public function admitPMbyC($user,$announce){
+    public function getArticleforFID($id){
+        $announce=Announce::find($id);
+        
+        // $rs=Record::with(['magazines'=>function($q) use ($id){
+        //     $q->where('announce_id',$id);
+        // }])->where('faculty_id',$cF_id)->get();
 
-    // }
+//          User::withAndWhereHas('submissions', function($query) use ($id){
+//     $query->where('taskid', $id);
+// })->get();
+
+         $role=Auth::user()->roles[0];
+         if($role->name =='manager'){
+             
+
+            $magazines=Magazine::with('record.faculty')->where('announce_id',$id)
+            ->where('selected_status',1)
+            ->orderBy('id','desc')->get();
+
+         }else{
+            $cF_id=Auth::user()->coordinator[0]->faculty_id;
+            $magazines=Magazine::whereHas('record',function($q) use ($cF_id){
+                $q->where('faculty_id','=',$cF_id);
+            })->with('record')
+            ->where('announce_id',$id)
+            ->orderBy('id','desc')->get();
+         }
+        
+
+         // for manager start
+         // $ms=Magazine::with(['record.faculty'=>function($q) use ($cF_id){
+         //    $q->where('id',$cF_id);
+         // }])->where('announce_id',$id)->get();
+         // dd($magazines);
+         // for manager end
+         return view('frontend.article.listforFMSM',compact('announce','magazines'));
+    }
+
+
+    public function articleDGuest($id){
+        $m=Magazine::find($id);
+        return view('frontend.articleDG',compact('m'));
+    }
+
+        //contributions for each faculty
+    public function getStatical1(){
+        // $datas= Magazine::all()
+        
+        // // ->sortByDESC(function ($item) {
+        // // return $item->created_at->month;
+        // // })
+        // ->sortByDESC(function ($item) {
+        // return $item->created_at->year;
+        // })
+        // ->whereBetween('created_at', [ Carbon::now()->startOfMonth()->subMonth(5), Carbon::now()->startOfMonth()])
+        // ->groupBy(function ($item) {
+        //      return $item->created_at->format("Y");
+        // })->map
+        // ->sum('total');
+        // $datas=Magazine::whereHas('record',function($q){
+        //         $q->groupBy('academic_id');
+        //     })->with('record')
+            
+        //     ->orderBy('id','desc')->get();
+        // $reportarray=[];
+        // $datas=Magazine::select([
+        //     DB::raw('YEAR(created_at) as year'),
+        //     DB::raw('Count(id) as count'),
+           
+        // ])
+        // ->groupBy('year')
+        // ->orderByDesc('year')->get();
+        // dd($datas);
+
+        //  foreach($datas as $key=>$value){
+        //     $reportarray['label'][]=$key;
+        //     $reportarray['data'][]=$value;
+        // }
+
+        // $data=Faculty::withCount(['magazines'=>function($q){
+        //     $q->with(['record'=>function($i){
+        //         $i->groupBy('faculty_id');
+        //     }]);
+        // }])->get();
+        // $data=Faculty::
+        // withCount('magazines')->get()
+        // ->groupBy(function($q){
+        //     return $q->records->id;
+        // });
+
+        // dd($data);
+        $data=DB::select('select academics.name as aname, faculties.name as fname,count(magazines.id) as cm from magazines 
+            join records on records.id = magazines.record_id 
+            join faculties on records.faculty_id = faculties.id 
+            join academics on academics.id = records.academic_id 
+            group by faculties.name,academics.name order by academics.id' );
+        
+
+        $faculty=Faculty::all();
+        foreach ($faculty as $v) {
+           $report[]=$v->name;
+        }
+
+        
+        return response()->json(['report'=>$report,'data'=>$data]);
+
+      }
+
+      //student count or contributions
+       public function getStatical2(){
+        // $datas= Magazine::all()
+        
+        // // ->sortByDESC(function ($item) {
+        // // return $item->created_at->month;
+        // // })
+        // ->sortByDESC(function ($item) {
+        // return $item->created_at->year;
+        // })
+        // ->whereBetween('created_at', [ Carbon::now()->startOfMonth()->subMonth(5), Carbon::now()->startOfMonth()])
+        // ->groupBy(function ($item) {
+        //      return $item->created_at->format("Y");
+        // })->map
+        // ->sum('total');
+        // $datas=Magazine::whereHas('record',function($q){
+        //         $q->groupBy('academic_id');
+        //     })->with('record')
+            
+        //     ->orderBy('id','desc')->get();
+        // $reportarray=[];
+        // $datas=Magazine::select([
+        //     DB::raw('YEAR(created_at) as year'),
+        //     DB::raw('Count(id) as count'),
+           
+        // ])
+        // ->groupBy('year')
+        // ->orderByDesc('year')->get();
+        // dd($datas);
+
+        //  foreach($datas as $key=>$value){
+        //     $reportarray['label'][]=$key;
+        //     $reportarray['data'][]=$value;
+        // }
+
+        // $data=Faculty::withCount(['magazines'=>function($q){
+        //     $q->with(['record'=>function($i){
+        //         $i->groupBy('faculty_id');
+        //     }]);
+        // }])->get();
+        // $data=Faculty::
+        // withCount('magazines')->get()
+        // ->groupBy(function($q){
+        //     return $q->records->id;
+        // });
+
+        // dd($data);
+        $data=DB::select('select academics.name as aname, faculties.name as fname,count(distinct(magazines.record_id)) as cm from magazines 
+            join records on records.id = magazines.record_id 
+            join faculties on records.faculty_id = faculties.id 
+            join academics on academics.id = records.academic_id 
+            group by faculties.name,academics.name order by academics.id' );
+        // dd($data);
+
+        $faculty=Faculty::all();
+        foreach ($faculty as $v) {
+           $report[]=$v->name;
+        }
+        // dd($data);
+        
+        return response()->json(['report'=>$report,'data'=>$data]);
+
+      }
+
+
+
+      public function downloadzip($id){
+        $m=Magazine::find($id);
+        // echo $id;
+        $public_dir=public_path().'/KMDtemplate/zipupload/';
+        // dd($public_dir);
+        $zipFileName = Carbon::now().'.zip';
+        $zip = new ZipArchive;
+
+        if ($zip->open($public_dir . '/' . $zipFileName, ZipArchive::CREATE) === TRUE) {    
+            $zip->addFile(public_path().$m->article);        
+             $zip->close();
+        }
+         $headers = array(
+                'Content-Type' => 'application/octet-stream',
+            );
+        $filetopath=$public_dir.'/'.$zipFileName;
+        if(file_exists($filetopath)){
+            return response()->download($filetopath,$zipFileName,$headers);
+        }
+        $a=['status'=>'file does not exist'];
+        echo $a['status'];
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

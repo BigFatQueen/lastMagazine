@@ -20,4 +20,14 @@ class Magazine extends Model
      	return $this->hasMany('App\Comment');
      }
 
+     public function announce(){
+     	return $this->belongsTo('App\Announce');
+     }
+
+     public function faculty(){
+        return $this->belongsTo('App\Faculty','App\Record');
+     }
+
+     
+
 }

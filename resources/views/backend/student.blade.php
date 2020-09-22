@@ -364,7 +364,7 @@
 
    <!--  -->
 
-   <div class="row" id="showTable">
+   <div class="row showTable">
       <div class="col-xl-12 mb-5 mb-xl-0">
       <div class="card  shadow">
          <div class="card-header bg-transparent">
@@ -380,10 +380,10 @@
          </div>
          <div class="card-body">
             <!-- Chart -->
-            <div class="chart">
+           
                <!-- Chart wrapper -->
-               <div class="table-responsive p-2">
-                      <table class="table table-hover" id="stutable">
+               <div class=" p-2">
+                      <table class="table table-responsive table-hover" id="stutable" >
                         <thead>
                           <tr>
                             <th>No</th>
@@ -395,12 +395,12 @@
                             <th>Action</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody >
                             
                         </tbody>
                       </table>
                     </div>
-            </div>
+            
          </div>
       </div>
    </div>
@@ -422,7 +422,7 @@
 
        $(document).on('click','.btn-new',function(){
          $('#add-form').show();
-         $('#showTable').hide();
+         $('.showTable').hide();
       })
 
       $('#levelchoice1').on('change',function(){
@@ -467,6 +467,10 @@
                $('.success').removeClass('d-none');
                $('.success').text(data.message);
                 $('.success').hide(5000);
+                $('#add-form').hide();
+                 $('#stutable').DataTable().ajax.reload();
+                 $('#add-form').hide();
+         $('.showTable').show();
 
              
             },
@@ -480,7 +484,7 @@
             }
 
          })
-          $('#stutable').DataTable().ajax.reload();
+         
       })
 
         $('#stutable').DataTable({
@@ -550,6 +554,8 @@
 
               $('#stutable').DataTable().ajax.reload();
                $('.success').hide(3000);
+               
+
             }
           },
           error:function(error){
@@ -685,6 +691,8 @@
 
                     $('#stutable').DataTable().ajax.reload();
                       $('.success').hide(5000);
+                      $('#edit-form1').hide();
+                      $('.showTable').show();
                   }
                },
                error:function(data){

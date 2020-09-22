@@ -1,184 +1,77 @@
-<x-frontend1>
+<x-backend>
     <div class="row mb-5 " >
 
       <!-- Post Content Column -->
-      <div class="col-lg-8 mt-5">
+      <div class="col-lg-12 mt-5">
 
         <!-- Title -->
 
-        <h1 class="mt-4">
-          @role('coordinator')
-              @if($magazine->selected_status !=1)
-              <a href="{{route('selectdProposal',$magazine->id)}}" class="btn btn-success float-right
-                ">Select Article</a>
-              @else
+         <div class="card p-2">
+          <div class="card-header">
+             <a href="{{route('selectdProposal',$magazine->id)}}" class="btn btn-success float-right
+              ">Select Article</a>
 
-              {{$magazine->title}}</h1>
-              @if (session()->has('success')) 
-              {{session('success')}}
-              @endif
-              {{session()->forget('success')}}
-
-              <h6 class="text-success text-uppercase">Congulation! This article is already selcted</h6>
-              @endif
-          @endrole
-
-         <h2> {{$magazine->title}}</h2>
-          
-          
-
-        <h4 class="mt-4">Article Pdf:
-          <a href="{{route('pdfview',$magazine->id)}}" target="_blank" >
-            @if($magazine->article !=null)
-            {{--@php
-            $name=explode('/',$magazine->article)
+              <a href="{{route('unselectdProposal',$magazine->id)}}" class="btn btn-success float-right
+              ">UnSelect Article</a>
 
 
 
-            @endphp--}}
 
-            {{--$name[3]--}}
-            article.pdf
-            @else
-            no article
-            @endif
-          </a>
-        </h4>
-
-        <!-- Author -->
-        <p class="lead">
-          by
-          <a href="#">{{$magazine->record->student->user->name}}</a>
-        </p>
-
-        <hr>
-
-        <!-- Date/Time -->
-        <p>Posted on {{Carbon\Carbon::parse($magazine->postDate)->isoFormat('MMMM Do YYYY, h:mm:ss A')}}</p>
-
-        <hr>
-
-        <!--  Preview Image 
-        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt=""> -->
-
-        
-
-        <!-- Post Content -->
-        <p class="lead">
-          {!!$magazine->description!!}
-        </p>
-
-        <hr>
-
-        <div id="app">
-            <!-- Comments Form -->
-            <div class="card my-4">
-              <h5 class="card-header">Leave a Comment:</h5>
-              <div class="card-body">
-                
-
-                  <div class="form-group">
-                    <textarea class="form-control comment" rows="3">
-                      
-                    </textarea>
+                 <h2> {{$magazine->title}}</h2>
+                 <p class="">
+                  by
+                  <a href="#">{{$magazine->record->student->user->name}}</a>  ,{{Carbon\Carbon::parse($magazine->postDate)->isoFormat('MMMM Do YYYY, h:mm:ss A')}}
+                </p>
+                <div class="row no-gutters p-2">
+                  <div class="col-md-4">
+                    <div class="col-md-12">
+                      <img src="{{$magazine->photo}}" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-md-12" class="" style="height:300px;overflow:hidden;overflow-y: scroll;">
+                      {!!$magazine->description!!}
+                    </div>
                   </div>
-                  <button type="JavaScript::void(0)" data-id="{{$magazine->id}}" class="btn btn-primary commentBtn">Submit</button>
-              
-              </div>
-            </div>
 
-            <!-- Single Comment -->
-            <div class="commentbox"></div>
+                  <div class="col-md-8">
+                    
+                    <embed src="{{$magazine->article}}#toolbar=0" style="width:100%; height:570px;">
 
-            <!-- Comment with nested comments -->
-            <!-- <div class="media mb-4">
-              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-              <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-                <div class="media mt-4">
-                  <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                  <div class="media-body">
-                    <h5 class="mt-0">Commenter Name</h5>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
                   </div>
-                </div>
-
-                <div class="media mt-4">
-                  <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                  <div class="media-body">
-                    <h5 class="mt-0">Commenter Name</h5>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                  </div>
-                </div>
-
-              </div>
-            </div> -->
-          </div>
-
-      </div>
-
-      <!-- Sidebar Widgets Column -->
-      <div class="col-md-4 mt-5">
-
-        <!-- Search Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Search</h5>
-          <div class="card-body">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-append">
-                <button class="btn btn-secondary" type="button">Go!</button>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Categories Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Categories</h5>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#">Web Design</a>
-                  </li>
-                  <li>
-                    <a href="#">HTML</a>
-                  </li>
-                  <li>
-                    <a href="#">Freebies</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#">JavaScript</a>
-                  </li>
-                  <li>
-                    <a href="#">CSS</a>
-                  </li>
-                  <li>
-                    <a href="#">Tutorials</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Side Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Side Widget</h5>
-          <div class="card-body">
+                  
+                 
             
+                </div>
+                <div class="card-body">
+                  <div class="" style="height: 100"></div>
+                  <div id="app">
+                        <!-- Comments Form -->
+                        <div class="card my-4">
+                          <h5 class="card-header">Leave a Comment:</h5>
+                          <div class="card-body">
+                            
+
+                              <div class="form-group">
+                                <textarea class="form-control comment" rows="3">
+                                  
+                                </textarea>
+                              </div>
+                              <button type="JavaScript::void(0)" data-id="{{$magazine->id}}" class="btn btn-primary commentBtn">Submit</button>
+                          
+                          </div>
+                        </div>
+
+                        <!-- Single Comment -->
+                        <div class="commentbox"></div>
+                   </div>
+                </div>
           </div>
-        </div>
+          
+         
+         </div>
 
       </div>
+
+      
 
     </div>
     <x-slot name='script'>
@@ -232,4 +125,4 @@
             })
         </script>
     </x-slot>
-</x-frontend1>
+</x-backend>

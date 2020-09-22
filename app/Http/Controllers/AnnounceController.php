@@ -15,14 +15,21 @@ class AnnounceController extends Controller
      */
     public function index()
     {
-        $announces=Announce::orderBy('id','desc')->get();
-        $m=Magazine::with('record')->get();
-        return view('frontend.announce',compact('announces','m'));
+        // $announces=Announce::orderBy('id','desc')->get();
+        $ms=Magazine::with('record','announce')->where('selected_status',1)->get();
+        // dd($ms);
+        return view('frontend.announce',compact('ms'));
     }
 
-    public function announceAdmin(){
+    public function announcelist(){
+       
+      
+        $m=Magazine::with('record')->get();
+
         $announces=Announce::orderBy('id','desc')->get();
-        return view('frontend.announceAdmin',compact('announces'));
+         $mselected=Magazine::with('record')->where('selected_status',1)->get();
+    // dd($mselected);
+        return view('frontend.announce.announcelist',compact('announces','m','mselected'));
     }
 
     /**
@@ -80,7 +87,7 @@ class AnnounceController extends Controller
 
           ]);
 
-         return redirect('/announce');
+         return redirect('/announceList');
     }
 
     /**
@@ -91,7 +98,8 @@ class AnnounceController extends Controller
      */
     public function show($id)
     {
-        //
+        $announce=Announce::find($id);
+        return view('frontend.announce.detail',compact('announce'));
     }
 
     /**
@@ -169,6 +177,7 @@ class AnnounceController extends Controller
      */
     public function destroy($id)
     {
-        echo $id;
+        Announce::find($id)->delete();
+        return redirect('/announceList');
     }
 }

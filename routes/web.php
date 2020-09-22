@@ -12,9 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', function () {
     return view('auth.login');
 });
+
 
 Route::get('/backend', function () {
     return view('backend.index');
@@ -73,9 +75,31 @@ Route::get('pdfview/{id}','MagazineController@pdfview')->name('pdfview');
 //adminProposalmanageByCoordinatior
 Route::get('admitPMbyC/{pid}','MagazineController@admitPMbyC')->name('admitPMbyC');
 Route::get('selectdProposal/{pid}','MagazineController@selectdProposal')->name('selectdProposal');
+Route::get('unselectdProposal/{pid}','MagazineController@unselectdProposal')->name('unselectdProposal');
 
 Route::get('/sendBasic','MagazineController@sendBasic')->name('sendBasic');
-Route::get('/announceAdmin','AnnounceController@announceAdmin')->name('announceAdmin');
+Route::get('/announceList','AnnounceController@announcelist')->name('announcelist');
+Route::get('/getArticleByAID/{id}','MagazineController@getArticleByAID')->name('getArticleByAID');
+
+//getarticle for coordinator according faculty id of coordinator
+Route::get('/getArticleforFID/{id}','MagazineController@getArticleforFID')->name('getArticleforFID');
+//article detail for guest
+Route::get('/articleDGuest/{id}','MagazineController@articleDGuest')->name('articleDGuest')->middleware('auth');
+
+
+// staticalDashboard.blade.php
+Route::get('/staticalDashboard','AllUserController@staticalDashboard')->name('staticalDashboard');
+
+Route::get('/getStatical1','MagazineController@getStatical1')->name('getStatical1');
+Route::get('/getStatical2','MagazineController@getStatical2')->name('getStatical2');
+
+
+Route::get('/downloadzip/{id}','MagazineController@downloadzip')->name('downloadzip');
+
+
+
+
+
 
 
 

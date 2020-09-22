@@ -82,6 +82,7 @@ class AllUserController extends Controller
         'address'=>$request->address,
         'education'=>$request->education
        ]);
+        
         $user->assignRole('manager');
 
         return response()->json(['message'=>'successfully account created']);
@@ -121,6 +122,10 @@ class AllUserController extends Controller
     public function getclassByL($id){
         $classes=Classroom::with('level')->where('level_id',$id)->get();
         return $classes;
+    }
+
+    public function staticalDashboard(){
+        return view('backend.staticalDashboard');
     }
 
 

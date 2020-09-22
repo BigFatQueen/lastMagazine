@@ -1,11 +1,9 @@
-@extends('layouts.app')
-
-@section('content')
+<x-frontend>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8 mt-5 pt-5">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header text-center text-uppercase">{{ __('Register As Guest to view More') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
@@ -83,4 +81,7 @@
         </div>
     </div>
 </div>
-@endsection
+<x-slot name="script">
+    
+</x-slot>
+</x-frontend>

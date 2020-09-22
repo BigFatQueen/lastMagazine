@@ -232,7 +232,7 @@
       </div>
    </div>
 
-   <div class="row" id="showTable">
+   <div class="row" id="cshowTable">
       <div class="col-xl-12 mb-5 mb-xl-0">
       <div class="card  shadow">
          <div class="card-header bg-transparent">
@@ -248,10 +248,10 @@
          </div>
          <div class="card-body">
             <!-- Chart -->
-            <div class="chart">
+            
                <!-- Chart wrapper -->
-               <div class="table-responsive p-2">
-                      <table class="table table-hover" id="cmtable">
+               <div class=" p-2">
+                      <table class="table  table-hover table-responsive" id="cmtable">
                         <thead>
                           <tr>
                             <th>No</th>
@@ -268,11 +268,12 @@
                         </tbody>
                       </table>
                     </div>
-            </div>
+            
          </div>
       </div>
+      </div>
    </div>
-   </div>
+</div>
 
 
            
@@ -281,9 +282,9 @@
     $(document).ready(function(){
       $('#add-form').hide();
         
-      $(document).on('click','.btn-new',function(){
+      $('.btn-new').on('click',function(){
          $('#add-form').show();
-         $('#showTable').hide();
+         $('#cshowTable').hide();
       })
 
 
@@ -304,7 +305,6 @@
       $('#cmtable').DataTable({
         "serverSide": true,
         "processing": true,
-        
         "sort":false,
         pagingType: 'full_numbers',
          pageLength: 10,
@@ -343,6 +343,7 @@
        ],
         info:false    
       });
+
        $('#form-add input[name="avatar"]').change(function(){
       //alert('hello');
       var  reader=new FileReader();
@@ -356,7 +357,7 @@
 
       $('#form-add').submit(function(e){
          e.preventDefault();
-         alert('hh');
+         // alert('hh');
          var formData=new FormData($(this)[0]);
          $.ajax({
             url:"{{route('coordinator.store')}}",
@@ -371,6 +372,7 @@
                 $('#showTable').show();
                $('.success').removeClass('d-none');
                $('.success').text(data.message);
+               
 
              
             },
@@ -384,7 +386,11 @@
             }
 
          })
+         // $('#add-form').hide();
+         console.log('heo');
+               
           $('#cmtable').DataTable().ajax.reload();
+          $('#cshowTable').show();
       })
 
 
@@ -504,6 +510,7 @@
                      $('.success').text(data.message);
 
                     $('#cmtable').DataTable().ajax.reload();
+                    $('#cshowTable').show();
                      // $('.success').hide(5000);
                   }
                },
@@ -518,14 +525,14 @@
          alert('hie');
          $('#add-form').addClass('d-none');
          // $('#edit-form').show();
-         $('#showTable').show();
+         $('#cshowTable').show();
       })
 
       $('.btn-cancel2').click(function(){
          $('.success').addClass('d-none');
          $('#edit-form').addClass('d-none');
          // $('#edit-form').show();
-         $('#showTable').show();
+         $('#cshowTable').show();
       })
       
     })

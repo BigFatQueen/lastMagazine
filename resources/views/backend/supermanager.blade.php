@@ -201,7 +201,7 @@
       </div>
    </div>
 
-   <div class="row" id="showTable">
+   <div class="row showTable">
       <div class="col-xl-12 mb-5 mb-xl-0">
       <div class="card  shadow">
          <div class="card-header bg-transparent">
@@ -217,7 +217,7 @@
          </div>
          <div class="card-body">
             <!-- Chart -->
-            <div class="chart">
+            
                <!-- Chart wrapper -->
                <div class="table-responsive p-2">
                       <table class="table table-hover" id="smtable">
@@ -237,7 +237,7 @@
                         </tbody>
                       </table>
                     </div>
-            </div>
+            
          </div>
       </div>
    </div>
@@ -252,7 +252,7 @@
         
       $(document).on('click','.btn-new',function(){
          $('#add-form').show();
-         $('#showTable').hide();
+         $('.showTable').hide();
       })
 
 
@@ -336,7 +336,7 @@
             success:function(data){
                // console.log(data);
                 $('#add-form').hide();
-                $('#showTable').show();
+                $('.showTable').show();
                $('.success').removeClass('d-none');
                $('.success').text(data.message);
 
@@ -404,7 +404,7 @@
 
          $('#edit-form').removeClass('d-none');
          // $('#edit-form').show();
-         $('#showTable').hide();
+         $('.showTable').hide();
 
          var id=$(this).data('id');
          var name=$(this).data('name');
@@ -446,7 +446,7 @@
                      // var message=JSON.parse(res);
                       $('#edit-form').addClass('d-none');
                         // $('#edit-form').show();
-                        $('#showTable').show();
+                        $('.showTable').show();
                      $('.success').removeClass('d-none');
                      $('.success').text(data.message);
 
@@ -465,14 +465,14 @@
          alert('hie');
          $('#add-form').addClass('d-none');
          // $('#edit-form').show();
-         $('#showTable').show();
+         $('.showTable').show();
       })
 
       $('.btn-cancel2').click(function(){
          $('.success').addClass('d-none');
          $('#edit-form').addClass('d-none');
          // $('#edit-form').show();
-         $('#showTable').show();
+         $('.showTable').show();
       })
       
     })

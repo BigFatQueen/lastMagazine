@@ -9,7 +9,7 @@ $magazines=$magazines
 
   @role('student')
         
-     @if( strtotime($announce->deadline) > time() )
+     @if( strtotime() > time() )
         <!-- Magazine Post Create -->
         <div class="card mb-4 mt-3" id="m-create">
          

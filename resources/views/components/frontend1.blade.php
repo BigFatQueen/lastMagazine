@@ -33,9 +33,9 @@
 <body class="d-flex flex-column">
 <div id="page-content">
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark  fixed-top" style="background-color: #0f61aa;">
+  <nav class="navbar navbar-expand-lg navbar-dark  fixed-top" style="background-color: #fff;">
     <div class="container">
-      <a class="navbar-brand" href="#">KMD</a>
+      <img src="{{asset('KMDtemplate/image/logo4.jpg')}}" width="10%" height="200" alt="">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
