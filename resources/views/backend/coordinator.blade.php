@@ -373,6 +373,7 @@
                 // $('#showTable').show();
                 $('#cmtable').DataTable().ajax.reload();
                 $('#cshowTable').show();
+                $(this).reset();
                $('.success').removeClass('d-none');
                $('.success').text(data.message);
                
@@ -507,7 +508,7 @@
                      // var message=JSON.parse(res);
                       $('#edit-form1').addClass('d-none');
                         // $('#edit-form').show();
-                        $('#showTable').show();
+                        // $('#showTable').show();
                      $('.success').removeClass('d-none');
                      $('.success').text(data.message);
 

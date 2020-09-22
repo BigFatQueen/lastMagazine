@@ -382,8 +382,8 @@
             <!-- Chart -->
            
                <!-- Chart wrapper -->
-               <div class=" p-2">
-                      <table class="table table-responsive table-hover" id="stutable" >
+               <div class="table-responsive p-2">
+                      <table class="table  table-hover" id="stutable" >
                         <thead>
                           <tr>
                             <th>No</th>
