@@ -336,6 +336,7 @@
             success:function(data){
                // console.log(data);
                 $('#add-form').hide();
+                $('#smtable').DataTable().ajax.reload();
                 $('.showTable').show();
                $('.success').removeClass('d-none');
                $('.success').text(data.message);
@@ -352,7 +353,7 @@
             }
 
          })
-          $('#smtable').DataTable().ajax.reload();
+          
       })
 
 
