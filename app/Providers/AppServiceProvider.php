@@ -26,9 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $magazines=Magazine::all();
+       // $magazines=Magazine::all();
         //$magazine=DB::table('articles')->get();
        // dd($articles);
-        View::share('data',[$magazines]);
+       // View::share('data',[$magazines]);
     }
 }
