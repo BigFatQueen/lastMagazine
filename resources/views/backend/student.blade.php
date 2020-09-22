@@ -570,7 +570,7 @@
         // alert('helo');
           $('#edit-form1').removeClass('d-none');
          // $('#edit-form').show();
-         $('#showTable').hide();
+         $('.showTable').hide();
          var html='';var lhtml='';var chtml='';
 
          var levels=$('#form-edit input[name="levelarray"]').val();
@@ -615,14 +615,14 @@
             
             lhtml+=`<option value="${v.id}"`
             if(v.id==level){
-              console.log('ue');
+              // console.log('ue');
               html+='selected'
             }
 
             lhtml+=`>${v.name}</option>`
          });
-         console.log(lhtml);
-         console.log(fName);
+         // console.log(lhtml);
+         // console.log(fName);
          lhtml+=`</select>`;
          $('#levelchoice22').html(lhtml);
 
@@ -646,7 +646,7 @@
             }
             chtml+=`>${v.name}</option>`
           });
-          console.log(chtml);
+          // console.log(chtml);
           $('#classchoice22').html(chtml);
         })
          
@@ -660,7 +660,7 @@
           $.each(res,function(i,v){
             html+=`<option value="${v.id}">${v.name}</option>`
           });
-          console.log(html);
+          // console.log(html);
           $('#classchoice22').html(html);
         })
       })
@@ -685,7 +685,7 @@
                      // var message=JSON.parse(res);
                       $('#edit-form1').addClass('d-none');
                         // $('#edit-form').show();
-                        $('#showTable').show();
+                        // $('.showTable').show();
                      $('.success').removeClass('d-none');
                      $('.success').text(data.message);
 
