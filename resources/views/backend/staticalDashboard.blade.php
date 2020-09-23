@@ -349,7 +349,7 @@ var data22 = {
               console.log(value);
               var total = 0;
               for (var i = 0; i < data.datasets.length; i++)
-                  total += data.datasets[i].data[tooltipItem.index];
+                  total += parseInt(data.datasets[i].data[tooltipItem.index]);
               if (tooltipItem.datasetIndex !== data.datasets.length - 1) {
                   return type + " : " + parseFloat(value).toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '1,');
               } else {
