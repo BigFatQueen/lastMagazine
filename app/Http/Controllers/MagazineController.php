@@ -75,7 +75,7 @@ class MagazineController extends Controller
      */
     public function store(Request $request)
     {
-         // dd($request);
+          // dd($request);
 
         $request->validate([
             'title' => ['required', 'max:255'],
@@ -83,7 +83,7 @@ class MagazineController extends Controller
             'article' => ['required','mimes:pdf'],
             'accept' => ['required'],
         ]);
-        
+        // dd($request);
        //  if ($validator->fails())
        //  {
        //      return response()->json(['errors'=>$validator->errors()->all()]);
@@ -147,11 +147,14 @@ class MagazineController extends Controller
         // protected $fillable=['title','photo','postDate','description','article','record_id'];
 
        $user_id=Auth::user()->id;
+       // dd($user_id);
         $student_id=Student::where('user_id',$user_id)->first();
+        // dd($student_id);
         $date=date('Y');
         $aca=Academic::where('name','=',$date)->first();
+        // dd($aca);
         $record=Record::where('student_id',$student_id->id)
-                ->where('academic_id',$aca->id)
+                // ->where('academic_id',$aca->id)
                 ->first();
                 $record_id=$record->id;
 
