@@ -468,6 +468,7 @@
                $('.success').text(data.message);
                 $('.success').hide(5000);
                 $('#add-form').hide();
+                $(this).reset();
                  $('#stutable').DataTable().ajax.reload();
                  $('#add-form').hide();
          $('.showTable').show();

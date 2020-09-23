@@ -8,10 +8,10 @@
          <div class="card-header">
           <a href="{{route('announcelist')}}" class="btn btn-sm btn-primary float-right"><i class="ni ni-bold-left"></i> </a>
             Announcing For School Event
-                @if(session('message')) 
-                 <span class="text-success">{{session('message')}}</span>
-                <?php session()->forget('message');?>
-                 @endif
+                                        {{--@if(session('message')) 
+                                         <span class="text-success">{{session('message')}}</span>
+                                        <?php session()->forget('message');?>
+                                         @endif--}}
          </div>
           <div class="card-body">
             
@@ -29,6 +29,10 @@
                   <div class="form-group">
                     <label for="dealline">Define for Closure date: </label>
                     <input type="date" name="deadline" class="form-control" id="dealline">
+                 </div>
+                 <div class="form-group">
+                    <label for="editline">Define for Editing Closure date: </label>
+                    <input type="date" name="editline" class="form-control" id="editline">
                  </div>
                   <div class="form-group text-center">
                       <button type="reset" class="col-md-4 btn form-control btn-outline-danger btn-sm">Reset</button>
@@ -71,6 +75,10 @@
                     <label for="dealline">Define for Closure date: </label>
                     <input type="date" name="deadline" class="form-control" id="dealline">
                  </div>
+                 <div class="form-group">
+                    <label for="editline">Define for Editing Closure date: </label>
+                    <input type="date" name="editline" class="form-control" id="editline">
+                 </div>
                   <div class="form-group text-center">
                       <button type="submit" class="btn form-control btn-success btn-sm">Upload</button>
                   </div>
@@ -111,7 +119,14 @@
                             <th>No</th>
                             <th>title</th>
                             <th>Deadline</th>
-                            <th>Article</th>
+                            <th>
+                              @role('coordinator')
+                              Article
+                              @endrole
+                              @role('superadmin')
+                            Last Edit Date
+                              @endrole
+                            </th>
                             <th>Action</th>
                             
                           </tr>
@@ -124,6 +139,7 @@
                             <td>{{$i++}}</td>
                             <td>{{$announce->title}}</td>
                             <td>{{$announce->deadline}}</td>
+
                             <td>
                              @hasanyrole('coordinator')
               
@@ -185,6 +201,9 @@
                               @endif
 
                               @endrole
+                              @role('superadmin')
+                              {{$announce->editLDate}}
+                              @endrole
 
                               </td>
                             <td>
@@ -202,6 +221,7 @@
                               <a href="javascript:void(0)" class="btn btn-outline-primary btn-sm btn-annonceEdit"  data-id="{{$announce->id}}"
                    data-title="{{$announce->title}}"
                    data-decsription="{{$announce->decsription}}"
+                   data-editline="{{$announce->editLDate}}"
                    data-deadline="{{$announce->deadline}}">Edit </a>
 
                              <form id="logout-form" action="{{ route('announce.destroy',$announce->id) }}" method="POST" class="d-inline">
@@ -253,11 +273,13 @@
               $('#showTable').addClass('d-none');
               var id=$(this).data('id');
               var deadline=$(this).data('deadline');
+              var editline=$(this).data('editline');
               var description=$(this).data('decsription');
               var title=$(this).data('title');
               $('#a-edit-form input[name="title"]').val(title);
               $('#a-edit-form .summernote').summernote('code',description);
               $('#a-edit-form input[name="deadline"]').val(deadline);
+              $('#a-edit-form input[name="editline"]').val(editline);
 
               var url="{{route('announce.update',':id')}}";
               url=url.replace(':id',id);

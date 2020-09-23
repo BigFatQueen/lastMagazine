@@ -53,41 +53,41 @@ class AnnounceController extends Controller
           // $postDate=Carbon::now()->toDateTimeString();
         $title=$request->title;
         //for descripton  and description photo
-        $des=$request->description;
-        $dom=new \DomDocument();
-        $dom->loadHTML($des,LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $images = $dom->getElementsByTagName('img');
+        // $des=$request->description;
+        // $dom=new \DomDocument();
+        // $dom->loadHTML($des,LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        // $images = $dom->getElementsByTagName('img');
        // dd($images); 
-        foreach($images as $k => $img){
+        // foreach($images as $k => $img){
 
-            $data = $img->getAttribute('src');
-            list($type, $data) = explode(';', $data);
+        //     $data = $img->getAttribute('src');
+        //     list($type, $data) = explode(';', $data);
 
-            list(, $data)      = explode(',', $data);
+        //     list(, $data)      = explode(',', $data);
 
-            $data = base64_decode($data);
+        //     $data = base64_decode($data);
 
-             $image_name='/storages/description/'.time().'.png';
+        //      $image_name='/storages/description/'.time().'.png';
 
-            $path = public_path() . $image_name;
-            file_put_contents($path, $data);
+        //     $path = public_path() . $image_name;
+        //     file_put_contents($path, $data);
 
-            $img->removeAttribute('src');
+        //     $img->removeAttribute('src');
 
-            $img->setAttribute('src', $image_name);
-        }
+        //     $img->setAttribute('src', $image_name);
+        // }
         // dd($postDate);
-           $description = $dom->saveHTML();
+           //$description = $dom->saveHTML();
             // protected $fillable=['title','photo','postDate','description','article','record_id'];
          $article= Announce::create([
             'title'=>$title,
-            'decsription'=>$description,
+            'decsription'=>$request->description,
             'deadline'=>$request->deadline,
+            'editLDate'=>$request->editline,
             
-
           ]);
 
-         return redirect('/announceList');
+         return redirect()->back();
     }
 
     /**
@@ -125,48 +125,50 @@ class AnnounceController extends Controller
         // dd($request);
          $title=$request->title;
         //for descripton  and description photo
-        $des=$request->description;
-        $dom=new \DomDocument();
-        $dom->loadHTML($des,LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $images = $dom->getElementsByTagName('img');
+        // $des=$request->description;
+        // $dom=new \DomDocument();
+        // $dom->loadHTML($des,LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        // $images = $dom->getElementsByTagName('img');
        // dd($images); 
-        foreach($images as $k => $img){
+        // foreach($images as $k => $img){
 
-            $data = $img->getAttribute('src');
-            if(Str::startsWith($data, 'data')){
-                // dd('yes it is');
-                list($type, $data) = explode(';', $data);
+        //     $data = $img->getAttribute('src');
+        //     if(Str::startsWith($data, 'data')){
+        //         // dd('yes it is');
+        //         list($type, $data) = explode(';', $data);
 
-                 list(, $data)      = explode(',', $data);
-                  $data = base64_decode($data);
-                    // dd($data);
+        //          list(, $data)      = explode(',', $data);
+        //           $data = base64_decode($data);
+        //             // dd($data);
 
-                     $image_name='/storages/description/'.time().'.png';
+        //              $image_name='/storages/description/'.time().'.png';
 
-                    $path = public_path() . $image_name;
-                    file_put_contents($path, $data);
+        //             $path = public_path() . $image_name;
+        //             file_put_contents($path, $data);
 
-                    $img->removeAttribute('src');
+        //             $img->removeAttribute('src');
 
-                    $img->setAttribute('src', $image_name);
-            }
+        //             $img->setAttribute('src', $image_name);
+        //     }
             
 
 
-        }
+        // }
         // dd($postDate);
-           $description = $dom->saveHTML();
+           //$description = $dom->saveHTML();
+           $description = $request->description;
             // protected $fillable=['title','photo','postDate','description','article','record_id'];
            $article=Announce::find($id);
          
             $article->title=$title;
             $article->decsription=$description;
             $article->deadline=$request->deadline;
+            $article->editLDate=$request->editline;
             $article->save();
 
           $request->session()->put('message', 'Successfully Updated!');
 
-         return redirect('/announceAdmin');
+         return redirect()->back();
     }
 
     /**
