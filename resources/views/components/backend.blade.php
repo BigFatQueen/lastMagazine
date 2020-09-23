@@ -135,12 +135,14 @@
             </form>
             <!-- Navigation -->
             <ul class="navbar-nav">
-              @role('superadmin')
+             @role('superadmin|student|coordinator|manager')
               <li class="nav-item  active ">
                 <a class="nav-link  active " href="/">
                   <i class="ni ni-tv-2 text-primary"></i> Dashboard
                 </a>
               </li>
+              @endrole
+               @role('superadmin')
               <li class="nav-item mt-4">
                 <a class="nav-link " href="{{route('supermanager.index')}}">
                   <i class="ni ni-planet text-blue"></i> Marketing Manger
@@ -162,11 +164,6 @@
                 </a>
               </li>
               @endrole
-              <li class="nav-item mt-4">
-                <a class="nav-link " href="">
-                  <i class="ni ni-single-02 text-yellow"></i> Dashboard
-                </a>
-              </li>
               <li class="nav-item mt-4">
                 <a class="nav-link " href="{{route('announcelist')}}">
                   <i class="ni ni-bullet-list-67 text-red"></i> Announce

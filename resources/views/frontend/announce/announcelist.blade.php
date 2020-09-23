@@ -208,7 +208,13 @@
                               </td>
                             <td>
                               @role('student')
-                              <a href="" class="btn btn-outline-danger btn-sm">Submit Article</a>
+                              @php
+                              $deadline=Carbon\Carbon::parse($announce->deadline)->addDay(1);
+                               @endphp
+                               @if( strtotime($deadline) > time() )
+                              <a href="{{route('getArticleByAID',$announce->id)}}" class="btn btn-outline-danger btn-sm">Submit Article</a>
+                              @endif
+
                               <a href="{{route('getArticleByAID',$announce->id)}}" class="btn btn-outline-primary btn-sm">My Articles</a>
                               @endrole
 

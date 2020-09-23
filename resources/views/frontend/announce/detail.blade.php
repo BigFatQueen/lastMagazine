@@ -3,11 +3,15 @@
           <div class="card shadow">
               <div class="mt-3 p-5" >
                     <!-- student -->
-                  <a href="" class="btn btn-primary float-right ml-1">Submit Article</a>
-                  <a href="" class="btn btn-success float-right">My Article</a>
+                 {{--<a href="{{route('getArticleByAID',$announce->id)}}" class="btn btn-primary float-right ml-1">Submit Article</a>
+
+                  <a href="{{route('getArticleByAID',$announce->id)}}" class="btn btn-success float-right">My Article</a>--}}
+
                   <a href="{{route('announcelist')}}" class="btn btn-dark float-right">Back </a>
+
                   <!-- coordinator or market -->
-                  <a href="" class="btn btn-success float-right">See Articles</a>
+                  {{--<a href="" class="btn btn-success float-right">See Articles</a>--}}
+
                   <!-- Title -->
                   <h1 class="mt-4 ">{{$announce->title}}</h1>
                   
