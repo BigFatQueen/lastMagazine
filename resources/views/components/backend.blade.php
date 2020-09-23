@@ -143,6 +143,16 @@
               </li>
               @endrole
                @role('superadmin')
+               <li class="nav-item mt-4">
+                <a class="nav-link " href="{{route('academic.index')}}">
+                  <i class="ni ni-planet text-blue"></i> Academic
+                </a>
+              </li>
+               <li class="nav-item mt-4">
+                  <a class="nav-link " href="{{route('faculty.index')}}">
+                    <i class="ni ni-planet text-blue"></i> Faculty
+                  </a>
+                </li>
               <li class="nav-item mt-4">
                 <a class="nav-link " href="{{route('supermanager.index')}}">
                   <i class="ni ni-planet text-blue"></i> Marketing Manger

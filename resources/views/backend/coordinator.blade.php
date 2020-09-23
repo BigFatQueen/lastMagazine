@@ -373,7 +373,7 @@
                 // $('#showTable').show();
                 $('#cmtable').DataTable().ajax.reload();
                 $('#cshowTable').show();
-                $(this).reset();
+                $('#form-add').trigger("reset");
                $('.success').removeClass('d-none');
                $('.success').text(data.message);
                
@@ -511,7 +511,7 @@
                         // $('#showTable').show();
                      $('.success').removeClass('d-none');
                      $('.success').text(data.message);
-
+                     $('#form-edit').trigger('reset');
                     $('#cmtable').DataTable().ajax.reload();
                     $('#cshowTable').show();
                      // $('.success').hide(5000);

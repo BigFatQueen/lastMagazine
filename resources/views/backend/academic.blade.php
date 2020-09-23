@@ -1,29 +1,36 @@
 <x-backend>
-  <div class="row justify-content-md-center">
-   <div style="padding-top: 105px">
-      <button class="btn btn-info mb-2 btn-add" type="button">+ADD</button>
-      <form id="form-list">
-          <table class="table table-hover dataTable no-footer" id="facultyTable" role="grid" style="width: 719px;">
-            <thead>
-              <tr role="row">
-                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 100;">No</th>
-                  <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 100;">Year</th>
-                  <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 100;">Created Date</th>
-                  <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 100;">Updated Date</th>
-                  <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 100;">Action</th>
-                </tr>
-            </thead>
-          <tbody id="tbody">
-          
-          </tbody>
-        </table>
-      </form>
-      <div id="btn-group">
-         <button class="btn btn-success btn-store" type="button">Store</button>
-         <button class="btn btn-primary btn-cancel" type="button">Cancel</button>
-      </div>    
+  <div class="row ">
+
+   <div class="card col-md-12">
+      <div class="mt-3 p-2">
+         <button class="btn btn-info mb-2 btn-add float-right" type="button">+ADD</button>
+         <h2 class="medium text-primary">Creating Academic Year</h2>
+         <form id="form-list">
+             <div class="table-responsive">
+                <table class="table table-hover dataTable no-footer" id="facultyTable" >
+                     <thead>
+                       <tr role="row">
+                         <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 100;">No</th>
+                           <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 100;">Year</th>
+                           <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 100;">Created Date</th>
+                           <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 100;">Updated Date</th>
+                           <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 100;">Action</th>
+                         </tr>
+                     </thead>
+                   <tbody id="tbody">
+                   
+                   </tbody>
+                 </table>
+             </div>
+         </form>
+         <div id="btn-group">
+            <button class="btn btn-success btn-store" type="button">Store</button>
+            <button class="btn btn-primary btn-cancel" type="button">Cancel</button>
+         </div>    
+      </div>
    </div>
-</div>
+   
+  </div>
 
 
 
@@ -98,12 +105,12 @@
                      table_num = 1;
                      $("#btn-group").hide();
                      ajaxAcademicList();
-                     alert(data.message);
+                     // alert(data.message);
                   }
                }
             });
          }else{
-            alert("Please Check Input Field")
+            alert("Please Check Input Field");
          }
       });
 
@@ -122,7 +129,7 @@
                   if(data.status == 200) {
                      table_num = 1;
                      ajaxAcademicList();
-                     alert(data.message);
+                     // alert(data.message);
                   }
                }
             });
@@ -145,7 +152,7 @@
                      if(data.status == 200) {
                         table_num = 1;
                         ajaxAcademicList();
-                        alert(data.message);
+                        // alert(data.message);
                      }
                   }
                });

@@ -198,6 +198,7 @@
             success:function(data){
 
                $('#facultyTable').DataTable().ajax.reload();
+               $('#edit-form').trigger("reset");
             },
             error:function(error){
               console.log(error);

@@ -336,6 +336,7 @@
             success:function(data){
                // console.log(data);
                 $('#add-form').hide();
+                $('#add-form').trigger('reset');
                 $('#smtable').DataTable().ajax.reload();
                 $('.showTable').show();
                $('.success').removeClass('d-none');
@@ -446,7 +447,7 @@
                       if(data){
                      // var message=JSON.parse(res);
                       $('#edit-form').addClass('d-none');
-                        // $('#edit-form').show();
+                       $('#edit-form').trigger('reset');
                         $('.showTable').show();
                      $('.success').removeClass('d-none');
                      $('.success').text(data.message);

@@ -468,7 +468,7 @@
                $('.success').text(data.message);
                 $('.success').hide(5000);
                 $('#add-form').hide();
-                $(this).reset();
+               $('#form-add').trigger('reset');
                  $('#stutable').DataTable().ajax.reload();
                  $('#add-form').hide();
          $('.showTable').show();
@@ -689,7 +689,7 @@
                         // $('.showTable').show();
                      $('.success').removeClass('d-none');
                      $('.success').text(data.message);
-
+                     $('#form-edit').trigger('reset');
                     $('#stutable').DataTable().ajax.reload();
                       $('.success').hide(5000);
                       $('#edit-form1').hide();

@@ -24,7 +24,7 @@ Route::get('/backend', function () {
 
 Route::get('/academic', function () {
     return view('backend.academic');
-});
+})->name('academic.index');
 
 Route::post('/comment','MagazineController@comment')->name('magazine.comment');
 Route::get('/getcomment/{id}','MagazineController@getcomment')->name('magazine.getcomment');
