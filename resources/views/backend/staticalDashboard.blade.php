@@ -423,15 +423,15 @@
           year2:[]
         };
 
-        var len=ya.length;
-        for(var i=0;i<len;i++){
-          if(ya[i].aname =='2019'){
+        // var len=ya.length;
+        // for(var i=0;i<len;i++){
+        //   if(ya[i].aname =='2019'){
 
-            year.year1.push(ya[i].cm);
-          }else if(ya[i].aname =='2020'){
-            year.year2.push(ya[i].cm);
-          }
-        }
+        //     year.year1.push(ya[i].cm);
+        //   }else if(ya[i].aname =='2020'){
+        //     year.year2.push(ya[i].cm);
+        //   }
+        // }
         var len=ya.length;
         for(var i=0;i<len;i++){
           if(ya[i].aname =='2019'){
