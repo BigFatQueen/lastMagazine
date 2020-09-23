@@ -351,9 +351,9 @@ var data22 = {
               for (var i = 0; i < data.datasets.length; i++)
                   total += data.datasets[i].data[tooltipItem.index];
               if (tooltipItem.datasetIndex !== data.datasets.length - 1) {
-                  return type + " : " + Math.round(value).replace(/(\d)(?=(\d{3})+\.)/g, '1,');
+                  return type + " : " + value.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '1,');
               } else {
-                  return [type + " : " + Math.round(value).replace(/(\d)(?=(\d{3})+\.)/g, '1,'), "Overall : " + total];
+                  return [type + " : " + value.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '1,'), "Overall : " + total];
               }
           }
       }
