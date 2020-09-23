@@ -346,6 +346,7 @@ var data22 = {
           label: function(tooltipItem, data) {
               var type = data.datasets[tooltipItem.datasetIndex].label;
               var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+              console.log(value);
               var total = 0;
               for (var i = 0; i < data.datasets.length; i++)
                   total += data.datasets[i].data[tooltipItem.index];
