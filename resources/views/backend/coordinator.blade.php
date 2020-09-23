@@ -251,8 +251,8 @@
             <!-- Chart -->
             
                <!-- Chart wrapper -->
-               <div class=" p-2">
-                      <table class="table  table-hover table-responsive" id="cmtable">
+               <div class="table-responsive p-2">
+                      <table class="table  table-hover " id="cmtable">
                         <thead>
                           <tr>
                             <th>No</th>
