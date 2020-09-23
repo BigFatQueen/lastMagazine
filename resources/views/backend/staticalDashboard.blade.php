@@ -258,7 +258,7 @@
         })
         console.log(year);
 
-        var ctx=$('#myChart3');
+        var ctx = $('#myChart3')[0].getContext('2d');
         // var data={
         //   labels:'',
         //   datasets:[{
@@ -282,23 +282,23 @@
         //   }]
         // }
 
-         var data = [{
-            label: '2019',
-            backgroundColor: ["#52DF26",
-              "#FFEC00",
-              "#FF7300","#FFEC00",
-              "#FF7300","#FFEC00",
-              "#FF7300"],
-            data: year.year1
-        }, {
-            label: '2020',
-            backgroundColor: ["#FF7300",
-              "#FFEC00",
-              "#52DF26","#FFEC00",
-              "#FF7300","#FFEC00",
-              "#FF7300"],
-            data: year.year2
-        }];
+        //  var data = [{
+        //     label: '2019',
+        //     backgroundColor: ["#52DF26",
+        //       "#FFEC00",
+        //       "#FF7300","#FFEC00",
+        //       "#FF7300","#FFEC00",
+        //       "#FF7300"],
+        //     data: year.year1
+        // }, {
+        //     label: '2020',
+        //     backgroundColor: ["#FF7300",
+        //       "#FFEC00",
+        //       "#52DF26","#FFEC00",
+        //       "#FF7300","#FFEC00",
+        //       "#FF7300"],
+        //     data: year.year2
+        // }];
         //  var data = [{
         //     label: '2019',
         //     backgroundColor: '#1d3f74',
@@ -310,101 +310,92 @@
         // }];
 
 
+var data22 = {
+    datasets: [{
+        data: year.year1,
+        backgroundColor: [
+            "#FF6384",
+            "#4BC0C0",
+            "#FFCE56",
+            "#E7E9ED",
+            "#36A2EB"
+        ],
+        label: '2019' // for legend
+    },{
+        data:year.year2,
+        backgroundColor: [
+            "#FF6384",
+            "#4BC0C0",
+            "#FFCE56",
+            "#E7E9ED",
+            "#36A2EB"
+        ],
+        label: '2020' // for legend
+    }],
+    labels: rp
+};
+       var options2 = {
+        responsive: true,
+  maintainAspectRatio: false,
+   tooltips: {
+     enabled: false
+   },
+    tooltips: {
+      mode: 'label',
+      callbacks: {
+          label: function(tooltipItem, data) {
+              var type = data.datasets[tooltipItem.datasetIndex].label;
+              var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+              var total = 0;
+              for (var i = 0; i < data.datasets.length; i++)
+                  total += data.datasets[i].data[tooltipItem.index];
+              if (tooltipItem.datasetIndex !== data.datasets.length - 1) {
+                  return type + " : " + value.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '1,');
+              } else {
+                  return [type + " : " + value.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '1,'), "Overall : " + total];
+              }
+          }
+      }
+  },
+  animation: {
+    duration: 500,
+    easing: "easeOutQuart",
+    onComplete: function () {
+      var ctx = this.chart.ctx;
+      ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'bottom';
 
+      this.data.datasets.forEach(function (dataset) {
 
-        // var options={
-        //    responsive: true,
-        //     title: {
-        //         display: true,
-        //         text: 'Chart.js'
-        //     },
-        // };
-         var options2 = {
-            maintainAspectRatio: false,
-            spanGaps: false,
-            responsive: true,
-            legend: {
-                display: true,
-                position: 'bottom',
-                labels: {
-                    fontColor: "#000",
-                    boxWidth: 14,
-                    fontFamily: 'proximanova'
-                }
-            },
-            tooltips: {
-                mode: 'label',
-                callbacks: {
-                    label: function(tooltipItem, data) {
-                        var type = data.datasets[tooltipItem.datasetIndex].label;
-                        var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                        var total = 0;
-                        for (var i = 0; i < data.datasets.length; i++)
-                            total += data.datasets[i].data[tooltipItem.index];
-                        if (tooltipItem.datasetIndex !== data.datasets.length - 1) {
-                            return type + " : " + value.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '1,');
-                        } else {
-                            return [type + " : " + value.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '1,'), "Overall : " + total];
-                        }
-                    }
-                }
-            },
-            plugins: {
-    //           datalabels: {
-    //   color: "#white",
-    //   align: "center"
-    // }
-                datalabels: {
-                    display :true,
-                    formatter: function(value, ctx) {
-                      // console.log(value);
-                        let sum = 0;
-                        // console.log(sum);
-                        let dataArr = ctx.chart.data.datasets[0].data;
-                        dataArr.map(data => {
-                            sum += data;
-                        });
-                        //console.log(sum);
-                        let percentage = (value * 100 / sum).toFixed(0) + "%";
-                        return percentage;
-                    },
-                    font: {
-                        weight: "normal"
-                    },
-                    color: "#000"
-                }
-            },
-            scales: {
-                xAxes: [{
-                    stacked: true,
-                    gridLines: {
-                        display: false
-                    },
-                    ticks: {
-                        fontColor: "#fff"
-                    },
-                    scaleLabel: {
-                            display: true,
-                            labelString: 'Faculty Names'
-                          }
+        for (var i = 0; i < dataset.data.length; i++) {
+          var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+              total = dataset._meta[Object.keys(dataset._meta)[0]].total,
+              mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius)/2,
+              start_angle = model.startAngle,
+              end_angle = model.endAngle,
+              mid_angle = start_angle + (end_angle - start_angle)/2;
 
-                }],
-                yAxes: [{
-                    stacked: true,
-                    display: false,
-                    ticks: {
-                        fontColor: "#fff"
-                    },
-                }]
-            }
+          var x = mid_radius * Math.cos(mid_angle);
+          var y = mid_radius * Math.sin(mid_angle);
 
-        };
+          ctx.fillStyle = '#fff';
+          if (i == 3){ // Darker text color for lighter background
+            ctx.fillStyle = '#444';
+          }
+          var percent = String(Math.round(dataset.data[i]/total*100)) + "%";
+          // ctx.fillText(dataset.data[i], model.x + x, model.y + y);
+          // Display percent in another line, line break doesn't work for fillText
+          ctx.fillText(percent, model.x + x, model.y + y + 15);
+        }
+      });               
+    }
+  }
+  
+ };
         var myChart = new Chart(ctx, {
             type: 'pie',
-            data: {
-                labels: rp,
-                datasets: data
-            },
+            data: data22,
             options: options2
         });
 
@@ -423,15 +414,6 @@
           year2:[]
         };
 
-        // var len=ya.length;
-        // for(var i=0;i<len;i++){
-        //   if(ya[i].aname =='2019'){
-
-        //     year.year1.push(ya[i].cm);
-        //   }else if(ya[i].aname =='2020'){
-        //     year.year2.push(ya[i].cm);
-        //   }
-        // }
         var len=ya.length;
         for(var i=0;i<len;i++){
           if(ya[i].aname =='2019'){
@@ -441,6 +423,15 @@
             year.year2.push(ya[i].cm);
           }
         }
+        // var len=ya.length;
+        // for(var i=0;i<len;i++){
+        //   if(ya[i].aname =='2019'){
+
+        //     year.year1.push(ya[i].cm);
+        //   }else if(ya[i].aname =='2020'){
+        //     year.year2.push(ya[i].cm);
+        //   }
+        // }
 
         var cp=rp.length;
         $.each(year,function(i,v){
