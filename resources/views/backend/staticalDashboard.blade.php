@@ -338,7 +338,7 @@ var data22 = {
         responsive: true,
   maintainAspectRatio: false,
    tooltips: {
-     enabled: false
+     enabled: true
    },
     tooltips: {
       mode: 'label',
