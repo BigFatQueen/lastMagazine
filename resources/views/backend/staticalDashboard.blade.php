@@ -434,18 +434,18 @@ var data22 = {
         //   }
         // }
 
-        var cp=rp.length;
-        $.each(year,function(i,v){
-          var vp=v.length;
-          if(vp<cp){
-            var nl=cp-vp;
-            for(let k=0;k<nl;k++){
-              v.push(0);
-            }
-          }else{
-            // console.log('2');
-          }
-        })
+        // var cp=rp.length;
+        // $.each(year,function(i,v){
+        //   var vp=v.length;
+        //   if(vp<cp){
+        //     var nl=cp-vp;
+        //     for(let k=0;k<nl;k++){
+        //       v.push(0);
+        //     }
+        //   }else{
+        //     // console.log('2');
+        //   }
+        // })
        console.log(year);
         var ctx=$('#mychart2');
         var datas={
