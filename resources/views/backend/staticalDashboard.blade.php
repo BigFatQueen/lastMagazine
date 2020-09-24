@@ -65,7 +65,7 @@
       $.get(url1,function(data){
         var ya=data.data;
         var rp=data.report;
-        console.log(rp);
+        // console.log(rp);
         var year={
           year1:[],
           year2:[]
@@ -256,7 +256,7 @@
             // console.log('2');
           }
         })
-        console.log(year);
+       // console.log(year);
 
         var ctx = $('#myChart3')[0].getContext('2d');
         // var data={
@@ -346,7 +346,7 @@ var data22 = {
           label: function(tooltipItem, data) {
               var type = data.datasets[tooltipItem.datasetIndex].label;
               var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-              console.log(value);
+              //console.log(value);
               var total = 0;
               for (var i = 0; i < data.datasets.length; i++)
                   total += parseInt(data.datasets[i].data[tooltipItem.index]);
