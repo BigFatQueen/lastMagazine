@@ -211,7 +211,7 @@
         },
         title: {
             display: true,
-            text: '2019 and 2020 Contributors Chart'
+            text: '2019 and 2020 Contributions Chart'
         }
         };
 
