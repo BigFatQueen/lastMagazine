@@ -514,11 +514,11 @@ class MagazineController extends Controller
         // });
 
         // dd($data);
-        $data=DB::select('select academics.name as aname, faculties.name as fname,count(magazines.id) as cm from magazines 
+        $data=DB::select('select academics.name as aname, faculties.id as fid,count(magazines.id) as cm from magazines 
             join records on records.id = magazines.record_id 
             join faculties on records.faculty_id = faculties.id 
             join academics on academics.id = records.academic_id 
-            group by faculties.name,academics.name order by academics.id' );
+            group by faculties.id,academics.name order by academics.id' );
         
 
         $faculty=Faculty::all();
@@ -578,11 +578,11 @@ class MagazineController extends Controller
         // });
 
         // dd($data);
-        $data=DB::select('select academics.name as aname, faculties.name as fname,count(distinct(magazines.record_id)) as cm from magazines 
+        $data=DB::select('select academics.name as aname, faculties.id as fid,count(distinct(magazines.record_id)) as cm from magazines 
             join records on records.id = magazines.record_id 
             join faculties on records.faculty_id = faculties.id 
             join academics on academics.id = records.academic_id 
-            group by faculties.name,academics.name order by academics.id' );
+            group by faculties.id,academics.name order by academics.id' );
         // dd($data);
 
         $faculty=Faculty::all();
