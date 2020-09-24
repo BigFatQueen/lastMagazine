@@ -499,7 +499,7 @@ var data22 = {
                 },
                 scaleLabel: {
                             display: true,
-                            labelString: 'Contributions'
+                            labelString: 'Contributors'
                           },
                           
             }],

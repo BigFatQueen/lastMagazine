@@ -29,7 +29,7 @@
                   </div> 
                   <input type="hidden" value="{{$announce->id}}" name="announce_id">
                   <div class="form-group">
-                    <label for="exampleFormControlFile1">Cover Poto</label>
+                    <label for="exampleFormControlFile1">Cover Photo</label>
                     @error('coverphoto')
                         <span class="text-danger d-block">{{ $message }}</span>
                     @enderror
@@ -85,6 +85,7 @@
                  
                   <div class="form-group">
                      <label for="exampleFormControlFile1">Cover Photo</label>
+                     <span class="photo-error text-danger"></span>
                     
                     
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -119,6 +120,7 @@
                   </div>
                   <div class="form-group">
                       <label for="magazine">magazine Pdf</label>
+                      <span class="file-error text-danger"></span>
                       
                       <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -126,6 +128,7 @@
                         </li>
                         <li class="nav-item" role="presentation">
                           <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#profile1" role="tab" aria-controls="profile" aria-selected="false">New Article</a>
+                          
                         </li>
                         
                       </ul>
@@ -136,13 +139,14 @@
                           </a>
                         </div>
                         <div class="tab-pane fade" id="profile1" role="tabpanel" aria-labelledby="profile-tab">
-                          <input type="file" name="article" class="form-control-file" id="magazine">
+
+                          <input type="file" name="article"  class="form-control-file" id="magazine">
                         </div>
                         
                       </div>
                    </div>
                   <div class="form-group text-center">
-                      <button type="submit" class="btn form-control btn-success btn-sm">Update Now!</button>
+                      <button type="submit" class="btn form-control btn-success btn-sm btn-update">Update Now!</button>
                   </div>
               </form>
           </div>
@@ -279,6 +283,8 @@
             // })
 
 
+
+
             $('.btn-magazineEdit').click(function(){
               // alert('helo');
               $('#m-edit').removeClass('d-none');
@@ -312,6 +318,85 @@
 
 
             })
+
+             $('#m-edit-form input[name="coverphoto"]').change(function(){
+              // alert('heo');
+               // Allowing file type 
+               var val=$(this).val();
+            var allowedExtensions= /(\.jpg|\.jpeg|\.png|\.gif)$/i; 
+                // console.log(allowedExtensions);
+                              
+                            if (!allowedExtensions.exec(val)) { 
+                                //alert('Invalid file type'); 
+                                $(this).val(''); 
+                      $('.photo-error').html('png/jpg are only allwed');
+                                $('.btn-update').prop('disabled',true);
+                                //return false; 
+                            } else{
+                               $('.photo-error').html('');
+                              $('.btn-update').prop('disabled',false);
+
+                            }
+            })
+
+            $('#m-edit-form input[name="article"]').change(function(){
+              // alert('heo');
+               // Allowing file type 
+               var val=$(this).val();
+            var allowedExtensions =  
+                /(\.pdf)$/i; 
+                // console.log(allowedExtensions);
+                              
+                            if (!allowedExtensions.exec(val)) { 
+                                //alert('Invalid file type'); 
+                                $(this).val(''); 
+                                $('.file-error').html('PDF only allwed');
+                                $('.btn-update').prop('disabled',true);
+                                //return false; 
+                            } else{
+                               $('.file-error').html('PDF only allwed');
+                              $('.btn-update').prop('disabled',false);
+                            }
+            })
+
+           
+
+
+
+
+            // $('#m-edit-form').submit(function(e){
+            //   e.preventDefault();
+            //   var article=$('#m-edit-form input[name="article"]').val();
+            //   var allowedExtensions1 =  
+            //       /(\.pdf)$/i; 
+            //       // console.log(allowedExtensions);
+
+            //        var photo=$('#m-edit-form input[name="coverphoto"]').val();
+                
+            //      var allowedExtensions2 =  
+            //         /(\.jpg|\.jpeg|\.png|\.gif)$/i; 
+            //       // console.log(allowedExtensions);
+                                
+            //       if (!allowedExtensions1.exec(article)) { 
+            //           //alert('Invalid file type'); 
+            //           $('#m-edit-form input[name="article"]').val(''); 
+            //           $('.file-error').html('PDF only allwed');
+                      
+                      
+            //       }else if(!allowedExtensions2.exec(photo)) { 
+            //           //alert('Invalid file type'); 
+            //           $('#m-edit-form input[name="coverphoto"]').val(''); 
+            //           $('.photo-error').html('png/jpg are only allwed');
+                     
+            //       } else{
+            //         $(this).trigger('submit');
+            //       }
+            //   })
+            //   // alert('helo');
+            
+
+
+
 
 
 
