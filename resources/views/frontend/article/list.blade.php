@@ -354,7 +354,7 @@
                                 $('.btn-update').prop('disabled',true);
                                 //return false; 
                             } else{
-                               $('.file-error').html('PDF only allwed');
+                               $('.file-error').html('');
                               $('.btn-update').prop('disabled',false);
                             }
             })
