@@ -446,7 +446,7 @@ var data22 = {
             // console.log('2');
           }
         })
-       // console.log(year);
+       console.log(year);
         var ctx=$('#mychart2');
         var datas={
           labels:rp,
