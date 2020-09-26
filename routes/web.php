@@ -97,6 +97,9 @@ Route::get('/getStatical2','MagazineController@getStatical2')->name('getStatical
 Route::get('/downloadzip/{id}','MagazineController@downloadzip')->name('downloadzip');
 
 
+Route::get('/getMByFID/{id}','MagazineController@getMByFID')->name('getMByFID');
+
+
 
 
 

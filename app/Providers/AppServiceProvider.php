@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
 use App\Magazine;
+use App\Faculty;
+use App\Announce;
 use DB;
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,9 +28,26 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       // $magazines=Magazine::all();
+       $magazines=Magazine::orderBy('id','desc')->limit(3)->get();
         //$magazine=DB::table('articles')->get();
        // dd($articles);
-       // View::share('data',[$magazines]);
+
+        $faculty=Faculty::withCount(['magazines'=>function($q){
+            $q->where('selected_status',1);
+        }])->get();
+
+
+        // $announces=Announce::orderBy('id','desc')->limit(5)->get();
+
+
+
+        // $faculty=null;
+        // $announces=null;
+         // dd($announces);
+        
+            View::share('data',[$faculty,$magazines]);
+    
+
+       
     }
 }

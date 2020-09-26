@@ -622,6 +622,21 @@ class MagazineController extends Controller
 
 
 
+      public function getMByFID($id){
+
+        // $cF_id=Auth::user()->coordinator[0]->faculty_id;
+            $ms=Magazine::whereHas('record',function($q) use ($id){
+                $q->where('faculty_id','=',$id);
+            })->with('record')
+            ->where('selected_status',1)
+            ->orderBy('id','desc')->get();
+            // dd($ms);
+             return view('frontend.announce',compact('ms'));
+
+      }
+
+
+
 
 
 

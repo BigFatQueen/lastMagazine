@@ -37,7 +37,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-white fixed-top" >
     <div class="container">
       
-        <img src="{{asset('KMDtemplate/image/logo4.jpg')}}" style="width: 10%">
+        <img src="{{asset('KMDtemplate/image/llogo.png')}}" style="width: 10%">
       
       
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,16 +46,16 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link text-dark" href="#" >Home
+            <a class="nav-link text-dark" href="/announce" >Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link text-dark" href="#">About</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-dark" href="#">Services</a>
-          </li>
+          </li> -->
           @if(!Auth::check())
           <li class="nav-item">
             <a class="nav-link text-dark" href="{{route('login')}}">Sign in</a>
@@ -88,7 +88,7 @@
   </nav>
 
   <!-- Page Content -->
-  <div class="container">
+  <div class="container mt-5">
 
    {{$slot}}
     <!-- /.row -->
@@ -97,7 +97,7 @@
   <!-- /.container -->
 </div>
   <!-- Footer -->
-  <footer class="py-5 " style="background-color: #f066b9;">
+  <footer class="py-5 " style="background-color: #2c4ba0;">
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
     </div>

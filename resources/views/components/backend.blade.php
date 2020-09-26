@@ -42,6 +42,10 @@
           display: none !important;
       }
 
+      .bg-gradient-primary {
+    background: linear-gradient(87deg, #081e9e 0, #5e6ce4 100%) !important;
+}
+
       </style>
    </head>
    <body class="" >
@@ -53,8 +57,8 @@
           </button>
           <!-- Brand -->
           <a class="navbar-brand pt-0" href="./index.html">
-            {{-- <img src="{{asset('KMDtemplate/image/logo2.png')}}"    class="navbar-brand-img" alt="..."> --}}
-            <h2 style="color: #27469d;">KMD</h2>
+            
+             <img src="{{asset('KMDtemplate/image/llogo.png')}}"  >
           </a>
           <!-- User -->
           <ul class="nav align-items-center d-md-none">

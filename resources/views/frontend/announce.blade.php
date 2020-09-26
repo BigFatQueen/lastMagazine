@@ -7,29 +7,36 @@
         <h1 class="my-4">Article lists
           
         </h1>
-
+        @if(!empty($ms))
         @foreach($ms as $m)
         <!-- Blog Post -->
         <div class="card mb-4">
-          <img class="card-img-top" src="{{$m->photo}}" alt="Card image cap">
-          <div class="card-body">
-            <h2 class="card-title">{{$m->title}}</h2>
-            <p class="card-text">
-              <?php
-              echo strlen($m->description) >= 200 ? 
-              substr($m->description, 0, 200) . ' ...' : 
-              $m->description;
-              ?>
-            </p>
-            <a href="{{route('articleDGuest',$m->id)}}" class="btn btn-primary">Read More &rarr;</a>
+         
+
+          <div class="card-body d-flex flex-row ">
+            <div style="width: 200px;height: 150px;">
+              <img src="{{$m->photo}}" class="img-fluid" alt="">
+            </div>
+            <div class="p-2">
+              <h2 class="card-title">{{$m->title}}</h2>
+              <p class="card-text">
+                <?php
+                echo strlen($m->description) >= 200 ? 
+                substr($m->description, 0, 200) . ' ...' : 
+                $m->description;
+                ?>
+              </p>
+              <a href="{{route('articleDGuest',$m->id)}}" class="btn btn-primary">Read More &rarr;</a>
+            </div>
           </div>
-          <div class="card-footer text-muted">
+          <div class="card-footer text-muted mt-5">
             <a class="float-right">{{$m->record->faculty->name}}</a>
              Posted on {{Carbon\Carbon::parse($m->created_at)->diffForHumans()}} by
             <a href="#">{{$m->record->student->user->name}}</a>
           </div>
         </div>
         @endforeach
+        @endif
       
 
         <!-- Pagination -->
@@ -45,63 +52,57 @@
       </div>
 
       <!-- Sidebar Widgets Column -->
-      <div class="col-md-4">
+      <div class="col-md-4 mt-5">
+        @if(!empty($data[0]))
+        <!--  -->
+        @php 
+        $faculties=$data[0];
 
-        <!-- Search Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Search</h5>
-          <div class="card-body">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-append">
-                <button class="btn btn-secondary" type="button">Go!</button>
-              </span>
-            </div>
-          </div>
-        </div>
+        @endphp
 
         <!-- Categories Widget -->
         <div class="card my-4">
-          <h5 class="card-header">Categories</h5>
+          <h5 class="card-header">Faculties</h5>
           <div class="card-body">
-            <div class="row">
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#">Web Design</a>
+            
+                <ul class="list-group">
+                  @foreach($faculties as $faculty)
+                  <a href="{{route('getMByFID',$faculty->id)}}">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{$faculty->name}}
+                    <span class="badge badge-primary badge-pill">{{$faculty->magazines_count}}</span>
                   </li>
-                  <li>
-                    <a href="#">HTML</a>
-                  </li>
-                  <li>
-                    <a href="#">Freebies</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#">JavaScript</a>
-                  </li>
-                  <li>
-                    <a href="#">CSS</a>
-                  </li>
-                  <li>
-                    <a href="#">Tutorials</a>
+                  </a>
+                  
+                  @endforeach
+                  
                   </li>
                 </ul>
-              </div>
-            </div>
+              
           </div>
         </div>
 
+        @endif
+
+        @if(!empty($data[1]))
+        @php
+        $magazines=$data[1];
+
+         @endphp
+         @foreach($magazines as $magazine)
         <!-- Side Widget -->
         <div class="card my-4">
-          <h5 class="card-header">Side Widget</h5>
+          <h5 class="card-header">{{$magazine->title}}</h5>
           <div class="card-body">
-            You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+            {{ substr(strip_tags($magazine->description), 0, 200) }}
+                   {{ strlen(strip_tags($magazine->description)) > 50 ? "..." : "" }}
+                   <div class="d-flex flex-row-reverse"> <a href="{{route('articleDGuest',$magazine->id)}}" class="btn btn-sm btn-info">Read More</a></div>
           </div>
+
         </div>
+        @endforeach
+
+        @endif
 
       </div>
 
