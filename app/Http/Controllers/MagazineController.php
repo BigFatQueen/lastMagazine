@@ -13,12 +13,14 @@ use App\Faculty;
 use App\Record;
 use Auth;
 use App\Comment;
+use Yajra\DataTables\Facades\DataTables;
 use App\Http\Resources\CommentResource;
 use Illuminate\Support\Str;
 use Mail;
 use URL;
 use DB;
 use ZipArchive;
+use Illuminate\Contracts\Encryption\DecryptException;
 class MagazineController extends Controller
 {
     /**
@@ -38,6 +40,7 @@ class MagazineController extends Controller
 
     public function getArticleByAID($id){
         // dd($id);
+        $id = decrypt($id);
 
          $role= Auth::user()->roles[0]->name;
        if($role=='student'){
@@ -194,6 +197,7 @@ class MagazineController extends Controller
      */
     public function show($id)
     {
+        $id = decrypt($id);
         $magazine=Magazine::find($id);
          return view('frontend.article.articleDetail',compact('magazine'));
     }
@@ -424,6 +428,7 @@ class MagazineController extends Controller
 
 
     public function getArticleforFID($id){
+        $id = decrypt($id);
         $announce=Announce::find($id);
         
         // $rs=Record::with(['magazines'=>function($q) use ($id){
@@ -463,6 +468,7 @@ class MagazineController extends Controller
 
 
     public function articleDGuest($id){
+        $id=decrypt($id);
         $m=Magazine::find($id);
         return view('frontend.articleDG',compact('m'));
     }
@@ -629,23 +635,39 @@ class MagazineController extends Controller
                 $q->where('faculty_id','=',$id);
             })->with('record')
             ->where('selected_status',1)
-            ->orderBy('id','desc')->get();
+            ->orderBy('id','desc')->paginate(6);
             // dd($ms);
              return view('frontend.announce',compact('ms'));
 
       }
 
 
+      public function getNoComment($id){
+        
+
+        $ms=Magazine::with('record.faculty','record.student.user')
+        ->where('announce_id','=',$id)
+        ->where('comment_status','=',0)
+        ->where('postDate','>=', Carbon::now()->subDays(14))
+        ->orderByDesc('id')
+        ->get();
 
 
+         
+         return Datatables::of($ms)->addIndexColumn()->make(true);
+
+      }
 
 
-
-
-
-
-
-
+      public function getNoComment14($id){
+        $ms=Magazine::with('record.faculty','record.student.user')
+        ->where('announce_id','=',$id)
+        ->where('comment_status','=',0)
+        ->where('postDate','<=', Carbon::now()->subDays(14))
+        ->orderByDesc('id')
+        ->get();
+         return Datatables::of($ms)->addIndexColumn()->make(true);
+      }
 
 
 

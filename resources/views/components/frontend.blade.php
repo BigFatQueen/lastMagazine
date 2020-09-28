@@ -34,7 +34,7 @@
 <body class="d-flex flex-column">
 <div id="page-content">
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-white fixed-top" >
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top" >
     <div class="container">
       
         <img src="{{asset('KMDtemplate/image/llogo.png')}}" style="width: 10%">
@@ -88,7 +88,7 @@
   </nav>
 
   <!-- Page Content -->
-  <div class="container mt-5">
+  <div class="container mt-2">
 
    {{$slot}}
     <!-- /.row -->
@@ -97,7 +97,7 @@
   <!-- /.container -->
 </div>
   <!-- Footer -->
-  <footer class="py-5 " style="background-color: #2c4ba0;">
+  <footer class="py-5 mt-2 " style="background-color: #2c4ba0;">
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; ewsdcw 2020</p>
     </div>

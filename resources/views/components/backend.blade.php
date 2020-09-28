@@ -63,10 +63,10 @@
           <!-- User -->
           <ul class="nav align-items-center d-md-none">
             <li class="nav-item dropdown">
-              <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link nav-link-icon d-none" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="ni ni-bell-55"></i>
               </a>
-              <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
+              <div class="dropdown-menu d-none dropdown-menu-arrow dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
                 <a class="dropdown-item" href="#">Action</a>
                 <a class="dropdown-item" href="#">Another action</a>
                 <div class="dropdown-divider"></div>
@@ -82,7 +82,7 @@
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                <div class=" dropdown-header noti-title">
+                <!-- <div class=" dropdown-header noti-title">
                   <h6 class="text-overflow m-0">Welcome!</h6>
                 </div>
                 <a href="./examples/profile.html" class="dropdown-item">
@@ -101,11 +101,17 @@
                   <i class="ni ni-support-16"></i>
                   <span>Support</span>
                 </a>
-                <div class="dropdown-divider"></div>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-user-run"></i>
-                  <span>Logout</span>
-                </a>
+                <div class="dropdown-divider"></div> -->
+                 <a class="dropdown-item" href="{{ route('logout') }}"
+                                               onclick="event.preventDefault();
+                                                             document.getElementById('logout-form1').submit();">
+                                               <i class="ni ni-user-run"></i>
+                        <span>Logout</span>
+                                            </a>
+
+                                            <form id="logout-form1" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>
               </div>
             </li>
           </ul>
@@ -115,8 +121,8 @@
             <div class="navbar-collapse-header d-md-none">
               <div class="row">
                 <div class="col-6 collapse-brand">
-                  <a href="./index.html">
-                    <img src="./assets/img/brand/blue.png">
+                  <a href="/">
+                    <img src="{{asset('KMDtemplate/image/llogo.png')}}">
                   </a>
                 </div>
                 <div class="col-6 collapse-close">
@@ -128,7 +134,7 @@
               </div>
             </div>
             <!-- Form -->
-            <form class="mt-4 mb-3 d-md-none">
+            <form class="mt-4 mb-3 d-none">
               <div class="input-group input-group-rounded input-group-merge">
                 <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Search" aria-label="Search">
                 <div class="input-group-prepend">
@@ -208,7 +214,7 @@
                 <!-- Brand -->
                 <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="/dashboard">Dashboard</a>
                 <!-- Form -->
-                <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+                <!-- <form class="navbar-search d-none navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
                   <div class="form-group mb-0">
                     <div class="input-group input-group-alternative">
                       <div class="input-group-prepend">
@@ -217,7 +223,7 @@
                       <input class="form-control" placeholder="Search" type="text">
                     </div>
                   </div>
-                </form>
+                </form> -->
                 <!-- User -->
                 <ul class="navbar-nav align-items-center d-none d-md-flex">
                   <li class="nav-item dropdown">
@@ -261,7 +267,7 @@
       <div class="container-fluid">
         <div class="header-body">
           <!-- Card stats -->
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-xl-3 col-lg-6">
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
@@ -346,17 +352,27 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
     <div class="container-fluid mt--7">
       {{$slot}}
       <!-- Footer -->
-      
+    </div>
+      <footer class="footer">
+        
+         
+            <div class="copyright text-center text-muted">
+              &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">ewsdcw</a>
+            </div>
+          
+          
+        
+      </footer> 
     </div>
   </div>
-  <footer class="footer">
+  <!-- <footer class="footer">
         <div class="row align-items-center justify-content-xl-end">
           <div class="col-xl-6">
             <div class="copyright text-center text-xl-left text-muted">
@@ -365,7 +381,7 @@
           </div>
           
         </div>
-      </footer>
+      </footer> -->
 
       <!--  -->
 

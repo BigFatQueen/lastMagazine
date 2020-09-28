@@ -163,7 +163,7 @@
                              
 
                               @if(in_array($cf,$freearr))
-                              <a href="{{route('getArticleforFID',$announce->id)}}" class="btn btn-success btn-sm">See Article</a>
+                              <a href="{{route('getArticleforFID',encrypt($announce->id))}}" class="btn btn-success btn-sm">See Article</a>
                               @else
                               <a href="javascript:void(0)" class="text-danger">No Articles</a>
 
@@ -187,7 +187,7 @@
                               @endphp
                                 
                               @if(in_array($announce->id,$freearr))
-                              <a href="{{route('getArticleforFID',$announce->id)}}" class="btn btn-success btn-sm">See Article</a>
+                              <a href="{{route('getArticleforFID',encrypt($announce->id))}}" class="btn btn-success btn-sm">See Article</a>
                               @else
                               <a href="javascript:void(0)" class="text-danger">No Articles</a>
 
@@ -212,10 +212,10 @@
                               $deadline=Carbon\Carbon::parse($announce->deadline)->addDay(1);
                                @endphp
                                @if( strtotime($deadline) > time() )
-                              <a href="{{route('getArticleByAID',$announce->id)}}" class="btn btn-outline-danger btn-sm">Submit Article</a>
+                              <a href="{{route('getArticleByAID',encrypt($announce->id))}}" class="btn btn-outline-danger btn-sm">Submit Article</a>
                               @endif
 
-                              <a href="{{route('getArticleByAID',$announce->id)}}" class="btn btn-outline-primary btn-sm">My Articles</a>
+                              <a href="{{route('getArticleByAID',encrypt($announce->id))}}" class="btn btn-outline-primary btn-sm">My Articles</a>
                               @endrole
 
                               
@@ -260,7 +260,19 @@
 <x-slot name="script">
       <script type="text/javascript">
           $(document).ready(function() {
-            $('.datatable').DataTable();
+            $('.datatable').DataTable({
+              sort:false,
+              pagingType: 'full_numbers',
+                           pageLength: 10,
+                           language: {
+                             oPaginate: {
+                               sNext: '<i class="fa fa-forward"></i>',
+                               sPrevious: '<i class="fa fa-backward"></i>',
+                               sFirst: '<i class="fa fa-step-backward"></i>',
+                               sLast: '<i class="fa fa-step-forward"></i>'
+                               }
+                             } ,
+            });
 
             // $('.summernote').summernote();
           

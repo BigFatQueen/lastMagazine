@@ -16,8 +16,8 @@ class AnnounceController extends Controller
     public function index()
     {
         // $announces=Announce::orderBy('id','desc')->get();
-        $ms=Magazine::with('record','announce')->where('selected_status',1)->get();
-        // dd($ms);
+        $ms=Magazine::with('record','announce')->where('selected_status',1)->paginate(6);
+         // dd($ms);
         return view('frontend.announce',compact('ms'));
     }
 

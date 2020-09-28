@@ -26,7 +26,7 @@
                 $m->description;
                 ?>
               </p>
-              <a href="{{route('articleDGuest',$m->id)}}" class="btn btn-primary">Read More &rarr;</a>
+              <a href="{{route('articleDGuest',encrypt($m->id))}}" class="btn btn-primary">Read More &rarr;</a>
             </div>
           </div>
           <div class="card-footer text-muted mt-5">
@@ -38,16 +38,16 @@
         @endforeach
         @endif
       
-
+        {{ $ms->links() }}
         <!-- Pagination -->
-        <ul class="pagination justify-content-center mb-4">
+        <!-- <ul class="pagination justify-content-center mb-4">
           <li class="page-item">
             <a class="page-link" href="#">&larr; Older</a>
           </li>
           <li class="page-item disabled">
             <a class="page-link" href="#">Newer &rarr;</a>
           </li>
-        </ul>
+        </ul> -->
 
       </div>
 

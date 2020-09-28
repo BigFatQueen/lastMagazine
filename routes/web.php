@@ -13,9 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('backend.staticalDashboard');
+// })->middleware('auth');
+
 Route::get('/', function () {
-    return view('backend.staticalDashboard');
-})->middleware('auth');
+
+	$user=Auth::user();
+	if($user->hasRole('guest')){
+	return redirect('/announce');	
+	}
+	return redirect('/staticalDashboard');
+    
+});
+
 
 
 Route::get('/backend', function () {
@@ -98,6 +109,13 @@ Route::get('/downloadzip/{id}','MagazineController@downloadzip')->name('download
 
 
 Route::get('/getMByFID/{id}','MagazineController@getMByFID')->name('getMByFID');
+
+
+// comment ajax
+Route::get('/getNoComment/{id}','MagazineController@getNoComment')->name('getNoComment');
+Route::get('/getNoComment14/{id}','MagazineController@getNoComment14')->name('getNoComment14');
+
+
 
 
 
