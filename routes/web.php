@@ -20,10 +20,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
 
 	$user=Auth::user();
-	if($user->hasRole('guest')){
-	return redirect('/announce');	
+	if(!$user->hasRole('guest')){
+		return redirect('/staticalDashboard');
+		
 	}
-	return redirect('/staticalDashboard');
+	return redirect('/announce');
+
+
+	
     
 });
 
