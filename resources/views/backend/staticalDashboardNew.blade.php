@@ -1,5 +1,5 @@
 <x-backend>
-   <div class="row">
+	 <div class="row">
         <div class="col-xl-8 mb-5 mb-xl-0">
           <div class="card shadow">
             <div class="card-header bg-transparent">
@@ -24,7 +24,7 @@
               <div class="row align-items-center">
                 <div class="col">
                   <h6 class="text-uppercase text-light ls-1 mb-1">Yearly</h6>
-                  <h2 class=" mb-0">Contributions </h2>
+                  <h2 class=" mb-0">Contributions</h2>
                 </div>
                 
               </div>
@@ -44,7 +44,7 @@
               <div class="row align-items-center">
                 <div class="col">
                   <h6 class="text-uppercase text-muted ls-1 mb-1">Percentage</h6>
-                  <h2 class="mb-0">Contributions for <span class="title">2019</span></h2>
+                  <h2 class="mb-0">Contributions</h2>
                 </div>
               </div>
             </div>
@@ -55,28 +55,11 @@
               </div>
             </div>
           </div>
-
-          <div class="card shadow mt-3">
-            <div class="card-header bg-transparent">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h6 class="text-uppercase text-muted ls-1 mb-1">Percentage</h6>
-                  <h2 class="mb-0">Contributions for <span class="title">2020</span></h2>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <!-- Chart -->
-              <div class="chart">
-                <canvas id="piechart3" ></canvas>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
       
-  <x-slot name="script">
-    <script>
+	<x-slot name="script">
+		<script>
      $(document).ready(function(){
       url1="{{route('getStatical1')}}";
       $.get(url1,function(data){
@@ -338,11 +321,7 @@ var data22 = {
             "#36A2EB"
         ],
         label: '2019' // for legend
-    }],
-    labels: rp
-};
-var data23 = {
-    datasets: [{
+    },{
         data:year.year2,
         backgroundColor: [
             "#FF6384",
@@ -355,13 +334,7 @@ var data23 = {
     }],
     labels: rp
 };
-
-
-
-
-
        var options2 = {
-         
         responsive: true,
   maintainAspectRatio: false,
    tooltips: {
@@ -395,12 +368,10 @@ var data23 = {
       ctx.textBaseline = 'bottom';
       var labels=this.data.labels;
 
-
       this.data.datasets.forEach(function (dataset) {
 
         for (var i = 0; i < dataset.data.length; i++) {
           // console.log(dataset.labels);
-
           var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
               total = dataset._meta[Object.keys(dataset._meta)[0]].total,
               mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius)/2,
@@ -429,13 +400,6 @@ var data23 = {
         var myChart = new Chart(ctx, {
             type: 'pie',
             data: data22,
-            options: options2
-        });
-
-        var ctxy=$('#piechart3')[0].getContext('2d');
-        var myChart = new Chart(ctxy, {
-            type: 'pie',
-            data: data23,
             options: options2
         });
 
@@ -569,6 +533,6 @@ var data23 = {
         })
       })
      })
-    </script>
-  </x-slot>
+		</script>
+	</x-slot>
 </x-backend>

@@ -99,7 +99,7 @@
   <!-- Footer -->
   <footer class="py-5 " style="background-color: #2c4ba0;">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+      <p class="m-0 text-center text-white">Copyright &copy; ewsdcw 2020</p>
     </div>
     <!-- /.container -->
   </footer>

@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       $magazines=Magazine::orderBy('id','desc')->limit(3)->get();
+       $magazines=Magazine::where('selected_status','=',1)->orderBy('id','desc')->limit(3)->get();
         //$magazine=DB::table('articles')->get();
        // dd($articles);
 
