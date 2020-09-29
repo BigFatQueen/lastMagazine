@@ -233,7 +233,7 @@
 
 
                              @endrole
-                               <a href="{{route('magazine.show',$magazine->id)}}" class="btn btn-secondary btn-sm " >Detail </a>
+                               <a href="{{route('magazine.show',encrypt($magazine->id))}}" class="btn btn-secondary btn-sm " >Detail </a>
                             </td>
                           </tr>
                           @endforeach
