@@ -10,8 +10,9 @@
           <div class="card-header">
             @role('coordinator')
             @if($magazine->selected_status !=1)
-             <a href="{{route('selectdProposal',$fbamagazine->id)}}" class="btn btn-success float-right
+             <a href="{{route('selectdProposal',$magazine->id)}}" class="btn btn-success float-right
               ">Select Article</a>
+              
               <h2> {{$magazine->title}}</h2>
             @else
               <a href="{{route('unselectdProposal',$magazine->id)}}" class="btn btn-success float-right

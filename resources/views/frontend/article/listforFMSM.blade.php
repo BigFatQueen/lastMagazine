@@ -20,7 +20,7 @@
               @role('coordinator')
               <button class="btn btn-sm btn-info ml-3 noComment14-btn" data-id="{{$announce->id}}">No Comment with 14 days</button>
               <button class="btn btn-sm btn-info ml-3 noComment-btn" data-id="{{$announce->id}}">No Comment</button>
-               <a class="btn btn-sm btn-info " href="{{route('getArticleforFID',$announce->id)}}" >All</a>
+               <a class="btn btn-sm btn-info " href="{{route('getArticleforFID',encrypt($announce->id))}}" >All</a>
                @endrole
             </div>
           </div>
