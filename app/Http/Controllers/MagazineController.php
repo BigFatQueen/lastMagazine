@@ -174,7 +174,8 @@ class MagazineController extends Controller
 
         $coordinator=Coordinator::with('user')->where('faculty_id',$record->faculty_id)->first();
         // dd($coordinator);
-         $data = array('name'=>$coordinator->user->name,'url'=> URL::route('magazine.show', 2));
+        $mid=encrypt($article->id);
+         $data = array('name'=>$coordinator->user->name,'url'=> URL::route('magazine.show', $mid));
          $email=$coordinator->user->email;
          // dd($email);
 
@@ -186,7 +187,7 @@ class MagazineController extends Controller
 
           // dd("sent");
 
-     return redirect()->route('getArticleByAID',$request->announce_id);
+     return redirect()->route('getArticleByAID',encrypt($request->announce_id));
     }
 
     /**
