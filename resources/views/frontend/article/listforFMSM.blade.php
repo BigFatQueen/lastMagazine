@@ -154,7 +154,7 @@
             {data:'record.faculty.name'},
             {data:'created_at'},
             {data:function(data){
-              var url="{{route('magazine.show',':id')}}";
+              var url="{{route('magazineShow',':id')}}";
               url= url.replace(':id',data.id);
               return `<a href="${url}" class="btn btn-sm btn-light">Detail</a>`
             }}
@@ -202,7 +202,7 @@
             {data:'record.faculty.name'},
             {data:'created_at'},
             {data:function(data){
-              var url="{{route('magazine.show',':id')}}";
+              var url="{{route('magazineShow',':id')}}";
               url= url.replace(':id',data.id);
               return `<a href="${url}" class="btn btn-sm btn-light">Detail</a>`
             }}

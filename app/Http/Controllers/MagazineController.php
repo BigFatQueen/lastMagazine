@@ -199,7 +199,15 @@ class MagazineController extends Controller
     public function show($id)
     {
         $id = decrypt($id);
+        // dd($id);
         $magazine=Magazine::find($id);
+        // dd($magazine);
+         return view('frontend.article.articleDetail',compact('magazine'));
+    }
+
+    public function magazineShow($id){
+        $magazine=Magazine::find($id);
+        // dd($magazine);
          return view('frontend.article.articleDetail',compact('magazine'));
     }
 
@@ -401,7 +409,7 @@ class MagazineController extends Controller
       $magazine->selected_status=1;
       $magazine->save();
      session(['success' => 'selected proposal!']);
-      return  redirect()->route('magazine.show',$id);
+      return  redirect()->route('magazine.show',encrypt($id));
     }
 
 
@@ -410,7 +418,7 @@ class MagazineController extends Controller
           $magazine->selected_status=0;
           $magazine->save();
          session(['success' => 'unselected proposal!']);
-          return  redirect()->route('magazine.show',$id);
+          return  redirect()->route('magazine.show',encrypt($id));
     }
 
 
@@ -605,6 +613,7 @@ class MagazineController extends Controller
 
 
       public function downloadzip($id){
+        $id=decrypt($id);
         $m=Magazine::find($id);
         // echo $id;
         $public_dir=public_path().'/KMDtemplate/zipupload/';

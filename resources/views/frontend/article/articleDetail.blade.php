@@ -14,7 +14,6 @@
               ">Select Article</a>
               <h2> {{$magazine->title}}</h2>
             @else
-
               <a href="{{route('unselectdProposal',$magazine->id)}}" class="btn btn-success float-right
               ">UnSelect Article</a>
               <h2> {{$magazine->title}}</h2>

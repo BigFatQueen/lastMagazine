@@ -123,6 +123,9 @@ Route::get('/getNoComment/{id}','MagazineController@getNoComment')->name('getNoC
 Route::get('/getNoComment14/{id}','MagazineController@getNoComment14')->name('getNoComment14');
 
 
+Route::get('magazineShow/{id}','MagazineController@magazineShow')->name('magazineShow');
+
+
 
 
 
