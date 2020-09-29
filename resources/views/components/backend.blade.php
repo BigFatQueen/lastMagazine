@@ -395,6 +395,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
   <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> -->
   <!-- <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script> -->
+  <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
   <!--   Argon JS   -->
   <!-- <script src="{{asset('KMDtemplate/assets/js/argon-dashboard.js')}}"></script> -->
   <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>

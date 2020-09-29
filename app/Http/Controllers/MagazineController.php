@@ -182,7 +182,7 @@ class MagazineController extends Controller
           Mail::send(['text'=>'mail'], $data, function($message) use ($email) {
              $message->to($email, 'Article Checking')->subject
                 ('Notification of new arrival Article');
-             $message->from('_mainaccount@khinzarchiaung.me','KMD Association');
+             $message->from('_mainaccount@bobomm.me','KMD Magazine');
           });
 
           // dd("sent");
@@ -654,8 +654,10 @@ class MagazineController extends Controller
 
       public function getNoComment($id){
         
-
-        $ms=Magazine::with('record.faculty','record.student.user')
+         $cF_id=Auth::user()->coordinator[0]->faculty_id;
+        $ms=Magazine::whereHas('record',function($q) use ($cF_id){
+                $q->where('faculty_id','=',$cF_id);
+            })->with('record.faculty','record.student.user')
         ->where('announce_id','=',$id)
         ->where('comment_status','=',0)
         ->where('postDate','>=', Carbon::now()->subDays(14))
@@ -670,7 +672,10 @@ class MagazineController extends Controller
 
 
       public function getNoComment14($id){
-        $ms=Magazine::with('record.faculty','record.student.user')
+         $cF_id=Auth::user()->coordinator[0]->faculty_id;
+        $ms=Magazine::whereHas('record',function($q) use ($cF_id){
+                $q->where('faculty_id','=',$cF_id);
+            })->with('record.faculty','record.student.user')
         ->where('announce_id','=',$id)
         ->where('comment_status','=',0)
         ->where('postDate','<=', Carbon::now()->subDays(14))

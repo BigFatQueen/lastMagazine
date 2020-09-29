@@ -152,7 +152,9 @@
             {data:'title'},
             {data:'record.student.user.name'},
             {data:'record.faculty.name'},
-            {data:'created_at'},
+            {data:'created_at',render:function(data){
+              return moment(data).format('l'); ;
+            }},
             {data:function(data){
               var url="{{route('magazineShow',':id')}}";
               url= url.replace(':id',data.id);
@@ -200,7 +202,7 @@
             {data:'title'},
             {data:'record.student.user.name'},
             {data:'record.faculty.name'},
-            {data:'created_at'},
+            {data:'postDate'},
             {data:function(data){
               var url="{{route('magazineShow',':id')}}";
               url= url.replace(':id',data.id);
