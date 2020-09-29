@@ -10,7 +10,7 @@
           <div class="card-header">
             @role('coordinator')
             @if($magazine->selected_status !=1)
-             <a href="{{route('selectdProposal',$magazine->id)}}" class="btn btn-success float-right
+             <a href="{{route('selectdProposal',$fbamagazine->id)}}" class="btn btn-success float-right
               ">Select Article</a>
               <h2> {{$magazine->title}}</h2>
             @else
@@ -22,12 +22,12 @@
             @endrole
 
             @role('manager')
-            <a href="{{route('downloadzip',$magazine->id)}}" class="btn btn-sm btn-success float-right">Download</a>
+            <a href="{{route('downloadzip',encrypt($magazine->id))}}" class="btn btn-sm btn-success float-right">Download</a>
               <h2> {{$magazine->title}}</h2>
             @endrole
 
             @role('student')
-            <a href="{{route('getArticleByAID',$magazine->announce_id)}}" class="btn btn-primary float-right
+            <a href="{{route('getArticleByAID',encrypt($magazine->announce_id))}}" class="btn btn-primary float-right
               ">Back</a>
               <h2> {{$magazine->title}}</h2>
             @endrole
