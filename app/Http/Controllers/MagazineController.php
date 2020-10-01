@@ -633,7 +633,8 @@ class MagazineController extends Controller
             return response()->download($filetopath,$zipFileName,$headers);
         }
         $a=['status'=>'file does not exist'];
-        echo $a['status'];
+        // echo $a['status'];
+        abort(404);
       }
 
 

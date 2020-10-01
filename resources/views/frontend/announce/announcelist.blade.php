@@ -110,7 +110,7 @@
          </div>
          <div class="card-body">
             <!-- Chart -->
-            <div class="chart">
+            <div class="">
                <!-- Chart wrapper -->
                <div class="table-responsive p-2">
                       <table class="table table-hover datatable" id="cmtable">
