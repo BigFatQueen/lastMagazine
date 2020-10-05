@@ -484,126 +484,102 @@ class MagazineController extends Controller
 
         //contributions for each faculty
     public function getStatical1(){
-        // $datas= Magazine::all()
-        
-        // // ->sortByDESC(function ($item) {
-        // // return $item->created_at->month;
-        // // })
-        // ->sortByDESC(function ($item) {
-        // return $item->created_at->year;
-        // })
-        // ->whereBetween('created_at', [ Carbon::now()->startOfMonth()->subMonth(5), Carbon::now()->startOfMonth()])
-        // ->groupBy(function ($item) {
-        //      return $item->created_at->format("Y");
-        // })->map
-        // ->sum('total');
-        // $datas=Magazine::whereHas('record',function($q){
-        //         $q->groupBy('academic_id');
-        //     })->with('record')
-            
-        //     ->orderBy('id','desc')->get();
-        // $reportarray=[];
-        // $datas=Magazine::select([
-        //     DB::raw('YEAR(created_at) as year'),
-        //     DB::raw('Count(id) as count'),
-           
-        // ])
-        // ->groupBy('year')
-        // ->orderByDesc('year')->get();
-        // dd($datas);
+       
+        $data=Magazine::with('record.academic','record.faculty')->get();
 
-        //  foreach($datas as $key=>$value){
-        //     $reportarray['label'][]=$key;
-        //     $reportarray['data'][]=$value;
-        // }
 
-        // $data=Faculty::withCount(['magazines'=>function($q){
-        //     $q->with(['record'=>function($i){
-        //         $i->groupBy('faculty_id');
-        //     }]);
-        // }])->get();
-        // $data=Faculty::
-        // withCount('magazines')->get()
-        // ->groupBy(function($q){
-        //     return $q->records->id;
-        // });
-
+         $data=collect($data);
+         $data=$data->groupBy(['record.academic.name','record.faculty.name'])->toArray();
         // dd($data);
-        $data=DB::select('select academics.name as aname, faculties.id as fid,count(magazines.id) as cm from magazines 
-            join records on records.id = magazines.record_id 
-            join faculties on records.faculty_id = faculties.id 
-            join academics on academics.id = records.academic_id 
-            group by faculties.id,academics.name order by academics.id' );
-        
-
-        $faculty=Faculty::all();
-        foreach ($faculty as $v) {
+         $faculties=Faculty::all();
+        // foreach ($faculties as $key => $value) {
+        //     echo $value->id;
+        // }
+         $report=[];
+         foreach ($faculties as $v) {
            $report[]=$v->name;
         }
 
-        
-        return response()->json(['report'=>$report,'data'=>$data]);
 
-      }
+       
+         
+         // dd($data);
+         foreach($data as $i=>$v){
+            foreach ($v as $k => $val) {
+                $data[$i][$k]=count($val);
+            }
+         }
+         
+         foreach ($data as $key => $value) {
+
+             foreach ($faculties as $f) {
+                 if(!array_key_exists($f->name, $value)){
+                    $data[$key][$f->name]=0;
+                 }
+                    
+             }
+              // ksort($data[$key]);
+
+         }
+
+         // ksort($data['4']);
+         // $report=[];
+         // dd($data);
+         foreach($data as $i=>$v){
+            $data[$i]=array_replace(array_flip($report), $v);
+         }
+         
+         
+
+
+         return response()->json(['report'=>$report,'data'=>$data]);
+        
+    }
 
       //student count or contributions
        public function getStatical2(){
-        // $datas= Magazine::all()
         
-        // // ->sortByDESC(function ($item) {
-        // // return $item->created_at->month;
-        // // })
-        // ->sortByDESC(function ($item) {
-        // return $item->created_at->year;
-        // })
-        // ->whereBetween('created_at', [ Carbon::now()->startOfMonth()->subMonth(5), Carbon::now()->startOfMonth()])
-        // ->groupBy(function ($item) {
-        //      return $item->created_at->format("Y");
-        // })->map
-        // ->sum('total');
-        // $datas=Magazine::whereHas('record',function($q){
-        //         $q->groupBy('academic_id');
-        //     })->with('record')
-            
-        //     ->orderBy('id','desc')->get();
-        // $reportarray=[];
-        // $datas=Magazine::select([
-        //     DB::raw('YEAR(created_at) as year'),
-        //     DB::raw('Count(id) as count'),
-           
-        // ])
-        // ->groupBy('year')
-        // ->orderByDesc('year')->get();
-        // dd($datas);
-
-        //  foreach($datas as $key=>$value){
-        //     $reportarray['label'][]=$key;
-        //     $reportarray['data'][]=$value;
-        // }
-
-        // $data=Faculty::withCount(['magazines'=>function($q){
-        //     $q->with(['record'=>function($i){
-        //         $i->groupBy('faculty_id');
-        //     }]);
-        // }])->get();
-        // $data=Faculty::
-        // withCount('magazines')->get()
-        // ->groupBy(function($q){
-        //     return $q->records->id;
-        // });
-
-        // dd($data);
-        $data=DB::select('select academics.name as aname, faculties.id as fid,count(distinct(magazines.record_id)) as cm from magazines 
-            join records on records.id = magazines.record_id 
-            join faculties on records.faculty_id = faculties.id 
-            join academics on academics.id = records.academic_id 
-            group by faculties.id,academics.name order by academics.id' );
-        // dd($data);
-
-        $faculty=Faculty::all();
-        foreach ($faculty as $v) {
+        // $data=DB::select('select count(distinct(magazines.record_id)) as cm from magazines 
+        //     join records on records.id = magazines.record_id 
+        //     join faculties on records.faculty_id = faculties.id 
+        //     join academics on academics.id = records.academic_id 
+        //     group by faculties.id,academics.name order by academics.id' );
+         // dd($data);
+         $faculties=Faculty::all();
+          $report=[];
+         foreach ($faculties as $v) {
            $report[]=$v->name;
         }
+        $data=Magazine::with('record.academic','record.faculty','record.student'
+        )->get();
+        // dd($data);
+
+
+
+         $data=collect($data);
+         $data=$data->groupBy(['record.academic.name','record.faculty.name','record_id'])->toArray();
+
+        foreach($data as $i=>$v){
+            foreach ($v as $k => $val) {
+                $data[$i][$k]=count($val);
+            }
+         }
+         // dd($data);
+         foreach ($data as $key => $value) {
+
+             foreach ($faculties as $f) {
+                 if(!array_key_exists($f->name, $value)){
+                    $data[$key][$f->name]=0;
+                 }
+                    
+             }
+              // ksort($data[$key]);
+
+         }
+
+        foreach($data as $i=>$v){
+            $data[$i]=array_replace(array_flip($report), $v);
+         }
         // dd($data);
         
         return response()->json(['report'=>$report,'data'=>$data]);

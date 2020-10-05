@@ -125,7 +125,7 @@ class AllUserController extends Controller
     }
 
     public function staticalDashboard(){
-        return view('backend.staticalDashboard');
+        return view('backend.staticalDashboardNew2');
     }
 
 

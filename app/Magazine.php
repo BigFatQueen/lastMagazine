@@ -30,4 +30,6 @@ class Magazine extends Model
 
      
 
+     
+
 }

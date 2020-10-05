@@ -120,7 +120,7 @@
       url1="{{route('getStatical1')}}";
       $.get(url1,function(data){
         var ya=data.data;
-        var rp=data.report;
+        var rp=data.report.name;
         // console.log(rp);
         var year={
           year1:[],
@@ -244,7 +244,7 @@
       //for percentage start
       $.get(url1,function(data){
         var ya=data.data;
-        var rp=data.report;
+        var rp=data.report.;
         // console.log(rp);
         var year={
           year1:[],
@@ -254,7 +254,7 @@
         var len=ya.length;
         for(var i=0;i<len;i++){
           if(ya[i].aname =='2019'){
-
+            if(ya[i].fid==rp[i])
             year.year1.push(ya[i].cm);
           }else if(ya[i].aname =='2020'){
             year.year2.push(ya[i].cm);
