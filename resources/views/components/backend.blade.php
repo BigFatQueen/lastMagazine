@@ -53,10 +53,17 @@
 @media (max-width: 990px) {
        .navbar-vertical .navbar-brand-img, .navbar-vertical .navbar-my-brand>img {
     max-width: 100% !important;
-    max-height: 2rem!important;
+    max-height: 5rem!important;
 }
       
       }
+
+      @media (max-width: 768px) { 
+         .navbar-vertical .navbar-brand-img, .navbar-vertical .navbar-my-brand>img {
+    max-width: 100% !important;
+    max-height: 2rem!important;
+}
+       }
 
       </style>
    </head>
