@@ -46,6 +46,18 @@
     background: linear-gradient(87deg, #081e9e 0, #5e6ce4 100%) !important;
 }
 
+.navbar-vertical .navbar-brand-img, .navbar-vertical .navbar-my-brand>img {
+    max-width: 100% !important;
+    max-height: 5rem!important;
+}
+@media (max-width: 990px) {
+       .navbar-vertical .navbar-brand-img, .navbar-vertical .navbar-my-brand>img {
+    max-width: 100% !important;
+    max-height: 2rem!important;
+}
+      
+      }
+
       </style>
    </head>
    <body class="" >
@@ -56,9 +68,9 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <!-- Brand -->
-          <a class="navbar-brand pt-0" href="./index.html">
+          <a class="navbar-my-brand pt-0" href="/">
             
-             <img src="{{asset('KMDtemplate/image/llogo.png')}}"  >
+             <img src="{{asset('KMDtemplate/image/logo46.png')}}"  >
           </a>
           <!-- User -->
           <ul class="nav align-items-center d-md-none">
@@ -122,7 +134,7 @@
               <div class="row">
                 <div class="col-6 collapse-brand">
                   <a href="/">
-                    <img src="{{asset('KMDtemplate/image/llogo.png')}}">
+                    <img src="{{asset('KMDtemplate/image/logo45.png')}}">
                   </a>
                 </div>
                 <div class="col-6 collapse-close">

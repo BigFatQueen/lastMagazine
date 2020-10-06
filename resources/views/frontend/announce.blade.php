@@ -52,7 +52,7 @@
       </div>
 
       <!-- Sidebar Widgets Column -->
-      <div class="col-md-4 mt-5">
+      <div class="col-md-4 mt-5 pt-4">
         @if(!empty($data[0]))
         <!--  -->
         @php 
@@ -84,25 +84,25 @@
 
         @endif
 
-        @if(!empty($data[1]))
-        @php
-        $magazines=$data[1];
-
-         @endphp
-         @foreach($magazines as $magazine)
-        <!-- Side Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">{{$magazine->title}}</h5>
-          <div class="card-body">
-            {{ substr(strip_tags($magazine->description), 0, 200) }}
-                   {{ strlen(strip_tags($magazine->description)) > 50 ? "..." : "" }}
-                   <div class="d-flex flex-row-reverse"> <a href="{{route('articleDGuest',$magazine->id)}}" class="btn btn-sm btn-info">Read More</a></div>
-          </div>
-
-        </div>
-        @endforeach
-
-        @endif
+       {{-- @if(!empty($data[1]))
+                      @php
+                      $magazines=$data[1];
+              
+                       @endphp
+                       @foreach($magazines as $magazine)
+                      <!-- Side Widget -->
+                      <div class="card my-4">
+                        <h5 class="card-header">{{$magazine->title}}</h5>
+                        <div class="card-body">
+                          {{ substr(strip_tags($magazine->description), 0, 200) }}
+                                 {{ strlen(strip_tags($magazine->description)) > 50 ? "..." : "" }}
+                                 <div class="d-flex flex-row-reverse"> <a href="{{route('articleDGuest',$magazine->id)}}" class="btn btn-sm btn-info">Read More</a></div>
+                        </div>
+              
+                      </div>
+                      @endforeach
+              
+                      @endif--}}
 
       </div>
 

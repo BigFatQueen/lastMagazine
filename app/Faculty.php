@@ -18,3 +18,8 @@ class Faculty extends Model
    	return $this->hasOneThrough('App\Magazine','App\Record');
    }
 }
+
+
+
+
+

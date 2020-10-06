@@ -45,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
         // $announces=null;
          // dd($announces);
         
-            View::share('data',[$faculty,$magazines]);
+            View::share('data',[$faculty]);
     
 
        
