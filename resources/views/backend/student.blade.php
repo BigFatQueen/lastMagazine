@@ -451,7 +451,7 @@
 
        $('#form-add').submit(function(e){
          e.preventDefault();
-         alert('hh');
+         // alert('hh');
          var formData=new FormData($(this)[0]);
          $.ajax({
             url:"{{route('student.store')}}",
