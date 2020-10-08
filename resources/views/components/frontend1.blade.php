@@ -9,7 +9,7 @@
   <meta name="author" content="">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>Blog Post - Start Bootstrap Template</title>
+  <title>ewsd</title>
 
   <!-- Bootstrap core CSS -->
   <link href="{{asset('KMDtemplate/blog/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">

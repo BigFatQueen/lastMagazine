@@ -8,7 +8,9 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Blog Home - Start Bootstrap Template</title>
+  <title>
+    ewsd
+  </title>
 
   <!-- Bootstrap core CSS -->
   <link href="{{asset('KMDtemplate/blog/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
