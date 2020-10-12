@@ -18,6 +18,27 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+      $user=User::create([
+        'name'=>'Admin',
+        'email'=>'admin@gmail.com',
+        'password'=>Hash::make('12345678'),
+
+      ]);
+      $user->assignRole('superadmin');
+      //  $manager=['name'=>'Marketing Manager',
+       //    'email'=>'manager1@gmail.com',
+       //    'password'=>'123456789',
+       //    'nrc'=>'9/AMZ(N)098766',
+       //    'phone'=>'09-8765433',
+       //    'address'=>'Hlaing,MyaNaDa Street',
+       //    'education'=>'M.SC(Business)'
+       //   ];
+
+       // $manager2= User::create([
+       //   'name'=>$manager['name'],
+       //   'email'=>$manager['email'],
+       //   'password'=>Hash::make($manager['password'])
+       //  ]);  
        //  $manager=['name'=>'Marketing Manager',
        //  	 'email'=>'manager1@gmail.com',
        //  	 'password'=>'123456789',
@@ -44,61 +65,61 @@ class UserTableSeeder extends Seeder
 
 
 
-    	$coordinator=['name'=>'Business coordinator',
-        	 'email'=>'bcoordinator777@gmail.com',
-        	 'password'=>'123456789',
-        	 'nrc'=>'9/MYK(N)090796',
-        	 'phone'=>'09-8765453',
-        	 'address'=>'Hlaing,ThanZin Street',
-        	 'education'=>'B.SC(Business)',
-        	 'faculty_id'=>1
-        	];
-        	//dd($coordinator);
+    	// $coordinator=['name'=>'Business coordinator',
+     //    	 'email'=>'bcoordinator777@gmail.com',
+     //    	 'password'=>'123456789',
+     //    	 'nrc'=>'9/MYK(N)090796',
+     //    	 'phone'=>'09-8765453',
+     //    	 'address'=>'Hlaing,ThanZin Street',
+     //    	 'education'=>'B.SC(Business)',
+     //    	 'faculty_id'=>1
+     //    	];
+     //    	//dd($coordinator);
 
-       $coordinator= User::create([
-        	'name'=>$coordinator['name'],
-        	'email'=>$coordinator['email'],
-        	'password'=>Hash::make($coordinator['password'])
-        ]);	
+     //   $coordinator= User::create([
+     //    	'name'=>$coordinator['name'],
+     //    	'email'=>$coordinator['email'],
+     //    	'password'=>Hash::make($coordinator['password'])
+     //    ]);	
         // protected $fillable=['user_id','faculty_id','photo','nrc','education','phone','address'];
 
-       Coordinator::create([
-       	'user_id'=>$coordinator->id,
-       	'faculty_id'=>1,
-       	'phone'=>$coordinator['phone'],
-       	'nrc'=>$coordinator['nrc'],
-       	'education'=>$coordinator['education'],
-       	'address'=>$coordinator['address']
-       ]);
-       $coordinator->assignRole('coordinator');
+      //  Coordinator::create([
+      //  	'user_id'=>$coordinator->id,
+      //  	'faculty_id'=>1,
+      //  	'phone'=>$coordinator['phone'],
+      //  	'nrc'=>$coordinator['nrc'],
+      //  	'education'=>$coordinator['education'],
+      //  	'address'=>$coordinator['address']
+      //  ]);
+      //  $coordinator->assignRole('coordinator');
 
-      $coordinator=['name'=>'Web coordinator',
-           'email'=>'wcoordinator999@gmail.com',
-           'password'=>'123456789',
-           'nrc'=>'9/MYK(N)099634',
-           'phone'=>'09-79876343',
-           'address'=>'Wireless,Myattar Street',
-           'education'=>'B.SC(Business)',
-           'faculty_id'=>2
-          ];
+      // $coordinator=['name'=>'Web coordinator',
+      //      'email'=>'wcoordinator999@gmail.com',
+      //      'password'=>'123456789',
+      //      'nrc'=>'9/MYK(N)099634',
+      //      'phone'=>'09-79876343',
+      //      'address'=>'Wireless,Myattar Street',
+      //      'education'=>'B.SC(Business)',
+      //      'faculty_id'=>2
+      //     ];
           //dd($coordinator);
 
-       $coordinator= User::create([
-          'name'=>$coordinator['name'],
-          'email'=>$coordinator['email'],
-          'password'=>Hash::make($coordinator['password'])
-        ]); 
-        // protected $fillable=['user_id','faculty_id','photo','nrc','education','phone','address'];
+       // // $coordinator= User::create([
+       // //    'name'=>$coordinator['name'],
+       // //    'email'=>$coordinator['email'],
+       // //    'password'=>Hash::make($coordinator['password'])
+       // //  ]); 
+       //  // protected $fillable=['user_id','faculty_id','photo','nrc','education','phone','address'];
 
-       Coordinator::create([
-        'user_id'=>$coordinator->id,
-        'faculty_id'=>2,
-        'phone'=>$coordinator['phone'],
-        'nrc'=>$coordinator['nrc'],
-        'education'=>$coordinator['education'],
-        'address'=>$coordinator['address']
-       ]);
-       $coordinator->assignRole('coordinator');
+       // Coordinator::create([
+       //  'user_id'=>$coordinator->id,
+       //  'faculty_id'=>2,
+       //  'phone'=>$coordinator['phone'],
+       //  'nrc'=>$coordinator['nrc'],
+       //  'education'=>$coordinator['education'],
+       //  'address'=>$coordinator['address']
+       // ]);
+       // $coordinator->assignRole('coordinator');
 
       // $student=['name'=>'student1',
       //      'email'=>'student123@gmail.com',

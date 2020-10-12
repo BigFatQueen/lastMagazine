@@ -323,7 +323,7 @@
     })
 
       $('#form-add').submit(function(e){
-        alert('helo');
+        // alert('helo');
          e.preventDefault();
          var formData=new FormData($(this)[0]);
          $.ajax({
@@ -464,7 +464,7 @@
       })
 
       $('.btn-cancel1').click(function(){
-         alert('hie');
+         // alert('hie');
          $('#add-form').addClass('d-none');
          // $('#edit-form').show();
          $('.showTable').show();

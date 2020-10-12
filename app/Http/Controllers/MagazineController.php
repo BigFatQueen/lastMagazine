@@ -173,11 +173,11 @@ class MagazineController extends Controller
       ]);
 
         $coordinator=Coordinator::with('user')->where('faculty_id',$record->faculty_id)->first();
-        // dd($coordinator);
+         // dd($coordinator);
         $mid=encrypt($article->id);
          $data = array('name'=>$coordinator->user->name,'url'=> URL::route('magazine.show', $mid));
          $email=$coordinator->user->email;
-         // dd($email);
+          // dd($email);
 
           Mail::send(['text'=>'mail'], $data, function($message) use ($email) {
              $message->to($email, 'Article Checking')->subject
@@ -185,7 +185,7 @@ class MagazineController extends Controller
              $message->from('_mainaccount@bobomm.me','KMD Magazine');
           });
 
-          // dd("sent");
+           // dd("sent");
 
      return redirect()->route('getArticleByAID',encrypt($request->announce_id));
     }
@@ -304,7 +304,7 @@ class MagazineController extends Controller
 
         $article->save();
 
-     return redirect()->route('getArticleByAID',$article->announce_id);
+     return redirect()->route('getArticleByAID',encrypt($article->announce_id));
 
     }
 

@@ -28,13 +28,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       $magazines=Magazine::where('selected_status','=',1)->orderBy('id','desc')->limit(3)->get();
+       //$magazines=Magazine::where('selected_status','=',1)->orderBy('id','desc')->limit(3)->get();
         //$magazine=DB::table('articles')->get();
        // dd($articles);
 
-        $faculty=Faculty::withCount(['magazines'=>function($q){
-            $q->where('selected_status',1);
-        }])->get();
+        // $faculty=Faculty::withCount(['magazines'=>function($q){
+        //     $q->where('selected_status',1);
+        // }])->get();
 
 
         // $announces=Announce::orderBy('id','desc')->limit(5)->get();
@@ -45,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
         // $announces=null;
          // dd($announces);
         
-            View::share('data',[$faculty]);
+            //View::share('data',[$faculty]);
     
 
        

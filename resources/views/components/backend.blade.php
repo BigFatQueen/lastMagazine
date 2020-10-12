@@ -199,11 +199,7 @@
                   <i class="ni ni-single-02 text-yellow"></i> Student
                 </a>
               </li>
-              <li class="nav-item mt-4">
-                <a class="nav-link " href="">
-                  <i class="ni ni-bullet-list-67 text-red"></i> Guest
-                </a>
-              </li>
+              
               @endrole
               <li class="nav-item mt-4">
                 <a class="nav-link " href="{{route('announcelist')}}">
