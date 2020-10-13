@@ -13,7 +13,7 @@
                </div>
             </div>
             <div class="card-body">
-               <form id="form-add"  method="post" enctype="mutipart/form-data">
+               <form id="form-add"  method="post" enctype="multipart/form-data">
                   <!-- accunt createing -->
                   <h6 class="heading-small text-muted mb-4">Account information</h6>
                   <div class="pl-lg-4">
