@@ -6,7 +6,7 @@
               <div class="row align-items-center">
                 <div class="col">
                   <h6 class="text-uppercase text-light ls-1 mb-1">Yearly</h6>
-                  <h2 class=" mb-0">Contributors Hello world</h2>
+                  <h2 class=" mb-0">Aritcle Contributors</h2>
                 </div>
                 
               </div>
@@ -24,7 +24,7 @@
               <div class="row align-items-center">
                 <div class="col">
                   <h6 class="text-uppercase text-light ls-1 mb-1">Yearly</h6>
-                  <h2 class=" mb-0">Contributions </h2>
+                  <h2 class=" mb-0">Article Contributions </h2>
                 </div>
                 
               </div>

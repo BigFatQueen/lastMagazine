@@ -380,7 +380,7 @@
         
          
             <div class="copyright text-center text-muted">
-              &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">ewsdcw</a>
+              &copy; 2020 <a href="#" class="font-weight-bold ml-1" target="_blank">ewsdcw</a>
             </div>
           
           
