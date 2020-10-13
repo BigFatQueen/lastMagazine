@@ -191,7 +191,7 @@
               </li>
               <li class="nav-item mt-4">
                 <a class="nav-link " href="{{route('coordinator.index')}}">
-                  <i class="ni ni-pin-3 text-orange"></i> Faculty-Manager
+                  <i class="ni ni-pin-3 text-orange"></i> Faculty Coordinator
                 </a>
               </li>
               <li class="nav-item mt-4">

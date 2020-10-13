@@ -5,7 +5,7 @@
             <div class="card-header bg-white border-0">
                <div class="row align-items-center">
                   <div class="col-8">
-                     <h3 class="mb-0">Faculty Marketing Manager</h3>
+                     <h3 class="mb-0">Creating New Faculty Coordinator</h3>
                   </div>
                   <div class="col-4 text-right">
                      <img class="new-img" src="{{asset('KMDtemplate/assets/img/theme/team-1-800x800.jpg')}}" width="80" height="80" alt="">
@@ -126,7 +126,7 @@
             <div class="card-header bg-white border-0">
                <div class="row align-items-center">
                   <div class="col-8">
-                     <h3 class="mb-0">Upating Marketing Manager</h3>
+                     <h3 class="mb-0">Updating Faculty Coordinator </h3>
                   </div>
                   <div class="col-4 text-right">
                      <img class="old-img-show" src="{{asset('KMDtemplate/assets/img/theme/team-1-800x800.jpg')}}" width="80" height="80" alt="">
@@ -241,7 +241,7 @@
                <div class="col">
                   <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
                   <button class="btn btn-outline-primary float-right btn-new">Add New</button>
-                  <h2 class=" mb-0">Manager List</h2>
+                  <h2 class=" mb-0">Faculty Coordinator List</h2>
                </div>
                
             </div>
@@ -525,7 +525,7 @@
       })
 
       $('.btn-cancel1').click(function(){
-         alert('hie');
+         // alert('hie');
          $('#add-form').addClass('d-none');
          // $('#edit-form').show();
          $('#cshowTable').show();

@@ -43,7 +43,7 @@ class CoordinatorController extends Controller
          $request->validate([
             'name' => 'required',
             'faculty_id' => 'required',
-            'email' => 'required|unique:users',
+            'email' => 'required|unique:users|',
            'password' => 'required|min:8|same:password_confirm',
            'password_confirm' => 'required|min:8',
         ]);
