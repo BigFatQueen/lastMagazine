@@ -50,13 +50,17 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+       $messages = [
+                    'password.regex' => 'Must include one UpperCase, LowerCase ,number and special sign!',
+                ];
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed','regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'],
-        ]);
+            'password' => ['required', 'string','min:6', 'confirmed','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'],
+        ],$messages);
     }
-
+    // ayechandafe
+    //Az.com#a345
     /**
      * Create a new user instance after a valid registration.
      *

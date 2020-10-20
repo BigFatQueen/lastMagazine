@@ -17,7 +17,7 @@ class CreateCoordinatorsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
              $table->unsignedBigInteger('faculty_id');
-            $table->text('photo')->nullable();
+            // $table->text('photo')->nullable();
             $table->text('nrc')->nullable();
             $table->string('education')->nullable();
             $table->string('phone')->nullable();

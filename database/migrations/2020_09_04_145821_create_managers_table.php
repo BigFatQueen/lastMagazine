@@ -16,7 +16,7 @@ class CreateManagersTable extends Migration
         Schema::create('managers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->text('photo')->nullable();
+            // $table->text('photo')->nullable();
             $table->text('nrc')->nullable();
             $table->string('education')->nullable();
             $table->string('phone')->nullable();
