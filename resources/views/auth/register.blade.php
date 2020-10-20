@@ -27,8 +27,11 @@
 
                             <div class="col-md-6">
                                 <input id="name" type="file" class="form-control " name="avatar"  autofocus>
-
-                                
+                            @error('avatar')
+                                 <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                             @enderror   
                             </div>
                         </div>
 

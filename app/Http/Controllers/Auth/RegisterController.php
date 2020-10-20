@@ -52,9 +52,11 @@ class RegisterController extends Controller
     {
        $messages = [
                     'password.regex' => 'Must include one UpperCase, LowerCase ,number and special sign!',
+                    'avatar.required'=> 'Profile is required'
                 ];
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'avatar' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string','min:6', 'confirmed','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'],
         ],$messages);
