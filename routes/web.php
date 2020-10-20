@@ -126,6 +126,14 @@ Route::get('/getNoComment14/{id}','MagazineController@getNoComment14')->name('ge
 Route::get('magazineShow/{id}','MagazineController@magazineShow')->name('magazineShow');
 
 
+// ==================================================================================================
+// forgeting password
+
+Route::post('reset_password_without_token','AccountsController@validatePasswordRequest');
+
+Route::post('reset_password_with_token','AccountsController@resetPassword');
+
+
 
 
 
