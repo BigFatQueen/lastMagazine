@@ -446,12 +446,7 @@
   ]
               });
 
-            //adding announce
-            $('.btn-new').click(function(){
-              $('#announce-add1').removeClass('d-none');
-              
-              $('#showTable').addClass('d-none');
-            })
+            
     })
   </script> 
   {{$script}}

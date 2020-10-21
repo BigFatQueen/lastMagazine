@@ -1,7 +1,8 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
-@section('content')
-<div class="container">
+@section('content') --}}
+<x-frontend>
+<div class="container  mt-5 pt-5 ">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -44,4 +45,8 @@
         </div>
     </div>
 </div>
-@endsection
+<x-slot name="script">
+    </x-slot>
+</x-frontend>
+
+{{--@endsection--}}

@@ -15,28 +15,33 @@
          </div>
           <div class="card-body">
             
-            <form method="post" action="{{route('announce.store')}}" enctype="multipart/form-data">
+            <form method="post" action="" enctype="multipart/form-data" id="announce-form-adding">
                   @csrf
                   <div class="form-group">
                       <label>Title</label>
                       <input type="text" name="title" class="form-control"/>
+                      <span class="title text-danger"></span>
                   </div> 
                  
                   <div class="form-group">
                       <label><strong>Description :</strong></label>
+                      <p class="description text-danger"></p>
                       <textarea class="summernote" name="description"></textarea>
+                      
                   </div>
                   <div class="form-group">
                     <label for="dealline">Define for Closure date: </label>
                     <input type="date" name="deadline" class="form-control" id="dealline">
+                    <span class="deadline text-danger"></span>
                  </div>
                  <div class="form-group">
                     <label for="editline">Define for Editing Closure date: </label>
                     <input type="date" name="editline" class="form-control" id="editline">
+                    <span class="editline text-danger"></span>
                  </div>
                   <div class="form-group text-center">
                       <button type="reset" class="col-md-4 btn form-control btn-outline-danger btn-sm">Reset</button>
-                      <button type="submit" class="col-md-4 btn form-control btn-success btn-sm">Upload</button>
+                      <button type="submit" class="col-md-4 btn form-control btn-success btn-form-add">Upload</button>
                   </div>
               </form>
 
@@ -278,7 +283,12 @@
           
 
 
-
+            //adding announce
+            $('.btn-new').click(function(){
+              $('#announce-add1').removeClass('d-none');
+              
+              $('#showTable').addClass('d-none');
+            })
 
 
 
@@ -306,6 +316,32 @@
 
 
               // console.log(deadline);
+            })
+
+            $('#announce-form-adding').submit(function(e){
+              e.preventDefault();
+              var formData= new FormData(this);
+                var url="{{route('announce.store')}}";
+                $.ajax({
+                          type:'POST',
+                          url: url,
+                          data: formData,
+                          cache:false,
+                          contentType: false,
+                          processData: false,
+                          success: (data) => {
+                            $('#announce-form-adding').trigger('reset');
+                          window.location.href="{{route('announcelist')}}"
+                              
+                          },
+                          error: function(error){
+                             var errors=error.responseJSON.errors;
+                             console.log(errors);
+                             $.each(errors,function(i,v){
+                              $(`.${i}`).html(v);
+                             })
+                          }
+                      });
             })
           });
       </script>

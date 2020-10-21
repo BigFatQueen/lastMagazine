@@ -14,6 +14,7 @@ class AcademicController extends Controller
      */
     public function index(Request $request)
     {
+
         $academic = Academic::all();
         return response()->json(['success'=>'Got List', "data" => $academic]);
 
@@ -37,6 +38,10 @@ class AcademicController extends Controller
      */
     public function store(Request $request)
     {
+          $request->validate([
+            'year' => 'required|unique:academics,name',
+           
+        ]);
         for ($i=0; $i < count($request["year"]) ; $i++) { 
             $year = new Academic;
             $year->name = $request['year'][$i];

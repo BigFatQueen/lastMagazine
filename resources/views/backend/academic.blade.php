@@ -53,7 +53,9 @@
          var tr = `
             <tr role="row" class="tr add-row">
                <td>${table_num}</td>
-               <td><input type="text" name="year[]" class="form-control year"></td>
+               <td><input type="text" name="year[]" class="form-control year">
+               <span class="eyear text-danger"></span></td>
+                     
                <td></td>
                <td></td>
                <td colspan="2">
@@ -107,6 +109,14 @@
                      ajaxAcademicList();
                      // alert(data.message);
                   }
+               },
+               error:function(data){
+                  let error=data.responseJSON.errors;
+
+                  $.each(error,function(i,v){
+                     console.log(v);
+                     $(`.e${i}`).html(v);
+                  })
                }
             });
          }else{

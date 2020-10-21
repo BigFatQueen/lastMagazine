@@ -50,6 +50,13 @@ class AnnounceController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'description'=>'required',
+            'deadline'=>'required',
+            'editline'=>'required'
+           
+        ]);
           // $postDate=Carbon::now()->toDateTimeString();
         $title=$request->title;
         //for descripton  and description photo

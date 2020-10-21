@@ -39,7 +39,7 @@ class FacultyController extends Controller
     {
         // dd($request);
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:faculties',
            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 

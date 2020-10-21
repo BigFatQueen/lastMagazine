@@ -2,7 +2,7 @@
 
 @section('content') --}}
 <x-frontend>
-<div class="container mt-5 pt-5">
+<div class="container mt-5 pt-5 ">
     <h2 class="text-center">Welcome to KMD Institute Magazine</h2>
     <div class="row justify-content-center">
         <div class="col-md-8">
