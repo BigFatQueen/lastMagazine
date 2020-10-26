@@ -13,11 +13,11 @@
         <div class="card mb-4">
          
 
-          <div class="card-body d-flex flex-row ">
-            <div style="width: 200px;height: 150px;">
+          <div class="card-body row">
+            <div class="col-md-4">
               <img src="{{$m->photo}}" class="img-fluid" alt="">
             </div>
-            <div class="p-2">
+            <div class="col-md-8 p-2">
               <h2 class="card-title">{{$m->title}}</h2>
               <p class="card-text">
                 <?php

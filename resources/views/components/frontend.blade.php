@@ -66,6 +66,15 @@
             <a class="nav-link text-dark" href="{{route('register')}}">Sing Up</a>
           </li>
           @else
+          
+           @role('superadmin|student|coordinator|manager')
+              <li class="nav-item  active ">
+                <a class="nav-link  active " href="/">
+                  <i class="ni ni-tv-2 text-primary"></i> Dashboard
+                </a>
+              </li>
+              @endrole
+
           <li class="nav-item dropdown">
                                 <a id="navbarDropdown " class="nav-link text-dark dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

@@ -21,13 +21,18 @@ Route::get('/', function () {
 
 	if(Auth::check()){
 		$user=Auth::user();
-		if(!$user->hasRole('guest')){
+		if($user->hasRole('guest')){
+			// dd('y');
+			return redirect('/announce');
+		}else{
 			return redirect('/staticalDashboard');
 			
 		}
+		
+	}else{
 		return redirect('/announce');
 	}
-	return redirect('/announce');
+	
 
 
 	
@@ -36,19 +41,53 @@ Route::get('/', function () {
 
 
 
-Route::get('/backend', function () {
-    return view('backend.index');
+// Route::get('/backend', function () {
+//     return view('backend.index');
+// });
+// ============================================================
+Route::group(['middleware' => ['auth','role:superadmin']], function () {
+
+    Route::get('/academic', function () {
+    return view('backend.academic');
+	})->name('academic.index');
+
+	Route::resource('/faculty','FacultyController');
+
+	Route::get('/supermanager','AllUserController@smindex')->name('supermanager.index');
+
+	Route::get('/getsuperManager','AllUserController@getsuperManager')->name('getsuperManager');
+
+	Route::delete('/supermanagerDelete/{id}','AllUserController@supermanagerDelete')->name('supermanagerDelete');
+	Route::post('/supermanagerStore','AllUserController@supermanagerStore')->name('supermanagerStore');
+	Route::put('/supermanagerUpdate/{id}','AllUserController@supermanagerUpdate')->name('supermanagerUpdate');
+
+	Route::resource('/coordinator','CoordinatorController');
+
+});
+// ============================================================
+
+Route::group(['middleware' => ['auth','role:superadmin|coordinator|student|manager']], function () {
+
+    Route::get('/staticalDashboard','AllUserController@staticalDashboard')->name('staticalDashboard');
+
+	Route::get('/getStatical1','MagazineController@getStatical1')->name('getStatical1');
+	Route::get('/getStatical2','MagazineController@getStatical2')->name('getStatical2');
+	
 });
 
-Route::get('/academic', function () {
-    return view('backend.academic');
-})->name('academic.index');
+
+
+
+
+// Route::get('/academic', function () {
+//     return view('backend.academic');
+// })->name('academic.index');  admin
 
 Route::post('/comment','MagazineController@comment')->name('magazine.comment');
 Route::get('/getcomment/{id}','MagazineController@getcomment')->name('magazine.getcomment');
 
 
-Route::resource('/faculty','FacultyController');
+// Route::resource('/faculty','FacultyController');//admin
 Route::get('/getFaculties','FacultyController@getFaculties')->name('getFaculties');
 
 Route::get("/academicList", "AcademicController@index");
@@ -61,17 +100,18 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // level route
-Route::resource('/level','backend\LevelController');
+// Route::resource('/level','backend\LevelController');
 
 
-Route::get('/supermanager','AllUserController@smindex')->name('supermanager.index');
-Route::get('/getsuperManager','AllUserController@getsuperManager')->name('getsuperManager');
-Route::delete('/supermanagerDelete/{id}','AllUserController@supermanagerDelete')->name('supermanagerDelete');
-Route::post('/supermanagerStore','AllUserController@supermanagerStore')->name('supermanagerStore');
-Route::put('/supermanagerUpdate/{id}','AllUserController@supermanagerUpdate')->name('supermanagerUpdate');
+// Route::get('/supermanager','AllUserController@smindex')->name('supermanager.index');
+// Route::get('/getsuperManager','AllUserController@getsuperManager')->name('getsuperManager');
+
+// Route::delete('/supermanagerDelete/{id}','AllUserController@supermanagerDelete')->name('supermanagerDelete');
+// Route::post('/supermanagerStore','AllUserController@supermanagerStore')->name('supermanagerStore');
+// Route::put('/supermanagerUpdate/{id}','AllUserController@supermanagerUpdate')->name('supermanagerUpdate');
 
 
-Route::resource('/coordinator','CoordinatorController');
+// Route::resource('/coordinator','CoordinatorController');
 Route::get('/getCoordinator','AllUserController@getCoordinator')->name('getCoordinator');
 
 Route::resource('/student','StudentController');
@@ -81,7 +121,8 @@ Route::get('/getclassByL/{id}','AllUserController@getclassByL')->name('getclassB
 Route::resource('/announce','AnnounceController');
 
 
-Route::resource('/magazine','MagazineController');
+Route::resource('/magazine','MagazineController')->middleware('auth');
+
 Route::get('/addProposal/{id}','MagazineController@addProposal')->name('addProposal');
 
 Route::get('/myproposalByA/{id}','MagazineController@myproposalByA')->name('myproposalByA');
@@ -106,10 +147,10 @@ Route::get('/articleDGuest/{id}','MagazineController@articleDGuest')->name('arti
 
 
 // staticalDashboard.blade.php
-Route::get('/staticalDashboard','AllUserController@staticalDashboard')->name('staticalDashboard');
+// Route::get('/staticalDashboard','AllUserController@staticalDashboard')->name('staticalDashboard');
 
-Route::get('/getStatical1','MagazineController@getStatical1')->name('getStatical1');
-Route::get('/getStatical2','MagazineController@getStatical2')->name('getStatical2');
+// Route::get('/getStatical1','MagazineController@getStatical1')->name('getStatical1');
+// Route::get('/getStatical2','MagazineController@getStatical2')->name('getStatical2');
 
 
 Route::get('/downloadzip/{id}','MagazineController@downloadzip')->name('downloadzip');

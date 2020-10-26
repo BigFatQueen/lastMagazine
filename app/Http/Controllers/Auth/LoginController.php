@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use URL;
 
 class LoginController extends Controller
 {
@@ -27,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -36,23 +37,38 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        // $this->redirectTo = URL::previous();
         $this->middleware('guest')->except('logout');
+
     }
+    public function showLoginForm()
+        {
+            if(!session()->has('url.intended'))
+            {
+                session(['url.intended' => url()->previous()]);
+            }
+            // session(['link' => url()->previous()]);
+            
+        return view('auth.login');    
+        }
     
-    public function logout(Request $request)
+     protected function authenticated(Request $request, $user)
     {
-        $this->guard()->logout();
-        $request->session()->invalidate();
-        return $this->loggedOut($request) ?: redirect('/login');
+        // app('router')->getRoutes()->match(app(
+        //     'request')->create(URL::prev))
+          $base=URL::to('/');
+         $ses_link=session('url.intended');
+         if($base == $ses_link){
+            if($user->hasRole('guest')){
+                return redirect('/announce');
+            }else{
+                return redirect('/staticalDashboard');
+            }
+        }else{
+            return redirect($ses_link);
+            
+        }
     }
 
-    protected function authenticated(Request $request, $user)
-    {
-        if($user->hasRole('guest')){
-            return redirect('/announce');
-        }else{
-            return redirect('/staticalDashboard');
-        }
-        // return redirect('/announceList');
-    }
+
 }

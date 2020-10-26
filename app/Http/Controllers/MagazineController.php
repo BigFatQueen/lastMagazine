@@ -23,6 +23,13 @@ use ZipArchive;
 use Illuminate\Contracts\Encryption\DecryptException;
 class MagazineController extends Controller
 {
+    public function __construct()
+    {
+        // Only Authenticated Users can access
+        $this->middleware('auth', ['only' => [
+            'show'
+        ]]);
+    }
     /**
      * Display a listing of the resource.
      *
