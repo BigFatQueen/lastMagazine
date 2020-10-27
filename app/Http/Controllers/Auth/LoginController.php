@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use URL;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
+
+use Illuminate\Support\Str;
+
 
 class LoginController extends Controller
 {
@@ -39,8 +43,10 @@ class LoginController extends Controller
     {
         // $this->redirectTo = URL::previous();
         $this->middleware('guest')->except('logout');
+         
 
     }
+
     public function showLoginForm()
         {
             if(!session()->has('url.intended'))
@@ -51,23 +57,41 @@ class LoginController extends Controller
             
         return view('auth.login');    
         }
+
+     
+
     
      protected function authenticated(Request $request, $user)
     {
         // app('router')->getRoutes()->match(app(
         //     'request')->create(URL::prev))
-          $base=URL::to('/');
+        $base=URL::to('/magazine');
          $ses_link=session('url.intended');
-         if($base == $ses_link){
+
+        $result = Str::startsWith($ses_link, $base);
+        if($result){
+           return redirect($ses_link);
+        }else{
             if($user->hasRole('guest')){
                 return redirect('/announce');
             }else{
                 return redirect('/staticalDashboard');
             }
-        }else{
-            return redirect($ses_link);
-            
         }
+         
+
+        
+        //  dd($ses_link);
+        //  if($base == $ses_link){
+        //     if($user->hasRole('guest')){
+        //         return redirect('/announce');
+        //     }else{
+        //         return redirect('/staticalDashboard');
+        //     }
+        // }else{
+        //     return redirect($ses_link);
+            
+        // }
     }
 
 
