@@ -9,6 +9,7 @@ use App\Level;
 use App\User;
 use App\Academic;
 use App\Record;
+use App\Magazine;
 use App\Student;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File; 
@@ -192,7 +193,12 @@ class StudentController extends Controller
     public function destroy($id)
     {
         // echo $id;
+
         $s=Record::find($id);
+        $magazines=Magazine::where('record_id',$id)->get();
+        foreach ($magazines as $m) {
+           $m->delete();
+        }
         Student::where('id',$s->student->id)->delete();
         User::where('id',$s->student->user->id)->delete();
         $s->delete();

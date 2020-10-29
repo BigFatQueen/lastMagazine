@@ -72,11 +72,13 @@ class LoginController extends Controller
         if($result){
            return redirect($ses_link);
         }else{
+
             if($user->hasRole('guest')){
                 return redirect('/announce');
             }else{
                 return redirect('/staticalDashboard');
             }
+            
         }
          
 

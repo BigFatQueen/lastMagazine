@@ -81,14 +81,14 @@
                 
                         <div class="content">
                             <div class="title m-b-md">
-                                Laravel
+                                Welcome to ACO Page
                             </div>
                 
                             <div class="links">
-                                <a href="/home">HOME</a>
-                                <a href="/about">ABOUT</a>
-                                <a href="/contact">CONTACT</a>
-                                <a href="{{route('aco')}}">Aco</a>
+                                <a href="">HOME</a>
+                                <a href="">ABOUT</a>
+                                <a href="">CONTACT</a>
+                                <a href="">Welcome</a>
                                 
                             </div>
                         </div>

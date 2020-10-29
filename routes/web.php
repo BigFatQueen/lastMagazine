@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('backend.staticalDashboard');
-// })->middleware('auth');
+Route::get('/', function () {
+    return view('backend.staticalDashboard');
+})->middleware('auth');
 
 Route::get('/', function () {
 
@@ -173,6 +173,52 @@ Route::get('magazineShow/{id}','MagazineController@magazineShow')->name('magazin
 Route::post('reset_password_without_token','AccountsController@validatePasswordRequest');
 
 Route::post('reset_password_with_token','AccountsController@resetPassword');
+
+// ==============================================================================================
+
+
+// Route::get('/welcome',function(){
+// 	return view('welcome');
+// })->name('welcomepagelink');
+
+// Route::get('/aco',function(){
+// 	return view('aco');
+// })->name('aco');
+
+// Route::get('/home',function(){
+// 	echo '<h1>i am Home Page</h1>';
+// })->name('front.home');
+
+// Route::get('/about',function(){
+// 	echo "<h1>i am About Page</h1>";
+// })->name('fornt.about');
+
+// Route::get('/contact',function(){
+// 	echo "<h1>i am Contact Page</h1>";
+// })->name('front.contact');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
