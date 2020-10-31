@@ -63,7 +63,7 @@
             <a class="nav-link text-dark" href="{{route('login')}}">Sign in</a>
           </li>
            <li class="nav-item">
-            <a class="nav-link text-dark" href="{{route('register')}}">Sing Up</a>
+            <a class="nav-link text-dark" href="{{route('register')}}">Sign Up</a>
           </li>
           @else
           
